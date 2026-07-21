@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kavya S - Academic Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #472f66;
+            --secondary-color: #4a90e2;
+            --accent-color: #e0d7ff;
+            --text-color: #000000;
+            --light-text: #333333;
+            --bg-color: #ffffff;
+            --sidebar-bg: #f9f8ff;
+            --shadow: 0 5px 15px rgba(107, 76, 230, 0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Poppins", sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; overflow-x: hidden; font-weight: 500; }
+        .animated-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #8b7fb8, #a8c5ff); background-size: 400% 400%; animation: gradientShift 15s ease infinite; opacity: 0.05; z-index: -2; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .bubbles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; pointer-events: none; }
+        .bubble { position: absolute; border-radius: 50%; opacity: 0.3; animation: floatBubble 15s infinite ease-in-out; }
+        @keyframes floatBubble { 0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; } 10% { opacity: 0.3; transform: scale(1); } 90% { opacity: 0.3; } 100% { transform: translateY(-100vh) translateX(100px) scale(0); opacity: 0; } }
+        .geometric-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .shape { position: absolute; opacity: 0.1; animation: floatShape 20s infinite ease-in-out; }
+        .shape-1 { width: 200px; height: 200px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; top: 10%; left: 10%; animation-duration: 25s; }
+        .shape-2 { width: 150px; height: 150px; background: linear-gradient(45deg, var(--secondary-color), var(--primary-color)); border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; top: 60%; right: 10%; animation-duration: 30s; animation-delay: -5s; }
+        .shape-3 { width: 180px; height: 180px; background: linear-gradient(90deg, var(--accent-color), var(--primary-color)); border-radius: 41% 59% 41% 59% / 41% 59% 41% 59%; bottom: 10%; left: 30%; animation-duration: 35s; animation-delay: -10s; }
+        @keyframes floatShape { 0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); } 25% { transform: translate(30px, -30px) rotate(90deg) scale(1.1); } 50% { transform: translate(-20px, 20px) rotate(180deg) scale(0.9); } 75% { transform: translate(20px, 30px) rotate(270deg) scale(1.05); } }
+        header { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; align-items: center; background-color: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 8px 15px; border-radius: 50px; box-shadow: var(--shadow); transition: var(--transition); animation: slideDown 0.8s ease-out; }
+        @keyframes slideDown { from { transform: translateY(-100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        header:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(139,127,184,0.15); }
+        .profile-circle { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; margin-right: 10px; overflow: hidden; animation: pulse 2s infinite; cursor: pointer; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(139,127,184,0.4); } 70% { box-shadow: 0 0 0 10px rgba(139,127,184,0); } 100% { box-shadow: 0 0 0 0 rgba(139,127,184,0); } }
+        .profile-name { font-weight: 600; color: var(--text-color); letter-spacing: 0.5px; }
+        .container { display: flex; min-height: 100vh; position: relative; }
+        .sidebar { width: 200px; background-color: var(--sidebar-bg); backdrop-filter: blur(10px); padding: 100px 0 30px; z-index: 50; box-shadow: 5px 0 15px rgba(0,0,0,0.05); transition: var(--transition); animation: slideRight 0.8s ease-out; overflow-y: auto; min-height: 100vh; }
+        @keyframes slideRight { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+        .nav-menu { list-style: none; }
+        .nav-item { margin-bottom: 5px; opacity: 0; animation: fadeInLeft 0.5s ease-out forwards; }
+        .nav-item:nth-child(1) { animation-delay: 0.1s; } .nav-item:nth-child(2) { animation-delay: 0.2s; } .nav-item:nth-child(3) { animation-delay: 0.3s; } .nav-item:nth-child(4) { animation-delay: 0.4s; } .nav-item:nth-child(5) { animation-delay: 0.5s; } .nav-item:nth-child(6) { animation-delay: 0.6s; } .nav-item:nth-child(7) { animation-delay: 0.7s; }
+        @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        .nav-link { display: flex; align-items: center; padding: 12px 20px; color: var(--text-color); text-decoration: none; transition: var(--transition); position: relative; overflow: hidden; font-weight: 600; letter-spacing: 0.5px; font-size: 0.9rem; }
+        .nav-link::before { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent-color), transparent); transition: var(--transition); }
+        .nav-link:hover::before { width: 100%; }
+        .nav-link:hover { color: var(--primary-color); padding-left: 25px; }
+        .nav-link i { margin-right: 12px; font-size: 1.1rem; transition: var(--transition); }
+        .nav-link:hover i { transform: rotate(10deg) scale(1.2); }
+        .nav-link.active { color: var(--primary-color); font-weight: 700; }
+        .nav-link.active::before { width: 5px; background-color: var(--primary-color); }
+        .main-content { flex: 1; padding: 20px; display: flex; flex-direction: column; position: relative; }
+    </style>
+</head>
+    <style>
+        /* Academic page specific styles */
+        .academic-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .academic-header { text-align: center; margin-bottom: 40px; animation: fadeInUp 1s ease-out; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .academic-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeIn 1s ease-out; position: relative; letter-spacing: 1px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .academic-title::after { content: ""; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); border-radius: 2px; animation: expandWidth 1.5s ease-out 0.5s forwards; }
+        @keyframes expandWidth { to { width: 100px; } }
+        .academic-intro { font-size: 1.2rem; color: var(--light-text); margin-bottom: 30px; line-height: 1.8; opacity: 0; animation: fadeIn 1.2s ease-out forwards; font-weight: 500; letter-spacing: 0.3px; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .section-header { margin: 40px 0 20px; position: relative; padding-left: 15px; animation: fadeInLeft 0.8s ease-out; }
+        .section-header::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); height: 70%; width: 5px; background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color)); border-radius: 3px; }
+        .section-title { font-size: 1.8rem; font-weight: 700; color: var(--primary-color); margin-bottom: 10px; }
+        .section-subtitle { font-size: 1rem; color: var(--light-text); font-weight: 500; }
+        .edu-card { background-color: var(--sidebar-bg); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 20px rgba(139,127,184,0.1); transition: var(--transition); opacity: 0; transform: translateY(30px); animation: fadeInUp 0.8s ease-out forwards; margin-bottom: 25px; position: relative; }
+        .edu-card:nth-child(1) { animation-delay: 0.1s; } .edu-card:nth-child(2) { animation-delay: 0.2s; } .edu-card:nth-child(3) { animation-delay: 0.3s; }
+        .edu-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 20px 40px rgba(139,127,184,0.15); }
+        .edu-card-header { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 20px 25px; display: flex; align-items: center; gap: 15px; }
+        .edu-card-icon { font-size: 2rem; }
+        .edu-card-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+        .edu-card-subtitle { font-size: 1rem; opacity: 0.9; }
+        .edu-card-body { padding: 20px 25px; }
+        .edu-detail-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.95rem; color: var(--light-text); }
+        .edu-detail-row i { color: var(--secondary-color); width: 18px; text-align: center; }
+        .edu-highlight { font-weight: 700; color: var(--primary-color); }
+        .skills-section { background-color: var(--sidebar-bg); border-radius: 20px; padding: 25px; box-shadow: 0 10px 20px rgba(139,127,184,0.1); margin-bottom: 30px; animation: fadeInUp 0.8s ease-out 0.2s forwards; opacity: 0; }
+        .skills-section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 20px; position: relative; display: inline-block; }
+        .skills-section-title::after { content: ""; position: absolute; bottom: -8px; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); border-radius: 2px; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; margin-top: 25px; }
+        .skill-badge { background: linear-gradient(135deg, var(--accent-color), white); padding: 14px 10px; border-radius: 15px; text-align: center; font-weight: 600; font-size: 0.9rem; color: var(--primary-color); box-shadow: 0 5px 10px rgba(139,127,184,0.1); transition: var(--transition); opacity: 0; animation: fadeInUp 0.5s ease-out forwards; }
+        .skill-badge:nth-child(1){animation-delay:0.05s;} .skill-badge:nth-child(2){animation-delay:0.1s;} .skill-badge:nth-child(3){animation-delay:0.15s;} .skill-badge:nth-child(4){animation-delay:0.2s;} .skill-badge:nth-child(5){animation-delay:0.25s;} .skill-badge:nth-child(6){animation-delay:0.3s;} .skill-badge:nth-child(7){animation-delay:0.35s;} .skill-badge:nth-child(8){animation-delay:0.4s;} .skill-badge:nth-child(9){animation-delay:0.45s;} .skill-badge:nth-child(10){animation-delay:0.5s;} .skill-badge:nth-child(11){animation-delay:0.55s;} .skill-badge:nth-child(12){animation-delay:0.6s;}
+        .skill-badge:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 15px rgba(139,127,184,0.15); }
+        .skill-badge i { display: block; font-size: 1.4rem; margin-bottom: 6px; color: var(--primary-color); }
+        .projects-list-section { background-color: var(--sidebar-bg); border-radius: 20px; padding: 25px; box-shadow: 0 10px 20px rgba(139,127,184,0.1); margin-bottom: 30px; animation: fadeInUp 0.8s ease-out 0.3s forwards; opacity: 0; }
+        .project-list-title { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 20px; position: relative; display: inline-block; }
+        .project-list-title::after { content: ""; position: absolute; bottom: -8px; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); border-radius: 2px; }
+        .project-list { list-style: none; margin-top: 25px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+        .project-list-item { display: flex; align-items: center; gap: 12px; background: white; padding: 15px 18px; border-radius: 12px; box-shadow: 0 4px 10px rgba(139,127,184,0.1); font-weight: 600; color: var(--text-color); font-size: 0.95rem; transition: var(--transition); opacity: 0; animation: fadeInUp 0.5s ease-out forwards; }
+        .project-list-item:nth-child(1){animation-delay:0.1s;} .project-list-item:nth-child(2){animation-delay:0.2s;} .project-list-item:nth-child(3){animation-delay:0.3s;} .project-list-item:nth-child(4){animation-delay:0.4s;}
+        .project-list-item:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(139,127,184,0.15); }
+        .project-list-item i { color: var(--primary-color); font-size: 1.2rem; flex-shrink: 0; }
+        footer { background-color: var(--sidebar-bg); backdrop-filter: blur(10px); padding: 20px; text-align: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); margin-top: auto; }
+        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .copyright { color: var(--light-text); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.3px; }
+        .social-links { display: flex; gap: 15px; }
+        .social-link { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: white; color: var(--primary-color); font-size: 1.1rem; transition: var(--transition); box-shadow: 0 5px 10px rgba(139,127,184,0.15); position: relative; overflow: hidden; }
+        .social-link::before { content: ""; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); transition: width 0.3s, height 0.3s; transform: translate(-50%, -50%); z-index: -1; }
+        .social-link:hover::before { width: 100%; height: 100%; }
+        .social-link:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(139,127,184,0.2); color: white; }
+        .menu-toggle { display: none; position: fixed; top: 20px; left: 20px; z-index: 100; background-color: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 10px; border-radius: 50%; box-shadow: var(--shadow); cursor: pointer; transition: var(--transition); }
+        .menu-toggle:hover { transform: scale(1.1); }
+        .menu-toggle span { display: block; width: 20px; height: 2px; background-color: var(--primary-color); margin: 5px auto; transition: var(--transition); }
+        @media (max-width: 768px) { .sidebar { position: fixed; transform: translateX(-100%); z-index: 99; } .sidebar.active { transform: translateX(0); } .main-content { padding: 15px; } .menu-toggle { display: flex; flex-direction: column; justify-content: center; align-items: center; } .academic-title { font-size: 2rem; } .skills-grid { grid-template-columns: repeat(3, 1fr); } .project-list { grid-template-columns: 1fr; } }
+    </style>
+<body>
+    <div class="animated-bg"></div>
+    <div class="bubbles-container" id="bubblesContainer"></div>
+    <div class="geometric-bg">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    <header>
+        <div class="profile-circle" onclick="window.open(`https://www.linkedin.com/in/kavya-s-4838ba307/`, `_blank`)">KS</div>
+        <div class="profile-name">Kavya S</div>
+    </header>
+    <div class="container">
+        <nav class="sidebar" id="sidebar">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="home.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li class="nav-item"><a href="resume.html" class="nav-link"><i class="fas fa-file-alt"></i> Resume</a></li>
+                <li class="nav-item"><a href="project.html" class="nav-link"><i class="fas fa-briefcase"></i> Projects</a></li>
+                <li class="nav-item"><a href="certificate.html" class="nav-link"><i class="fas fa-certificate"></i> Certifications</a></li>
+                <li class="nav-item"><a href="academic.html" class="nav-link active"><i class="fas fa-graduation-cap"></i> Academic</a></li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <section class="academic-container">
+                <div class="academic-header">
+                    <h1 class="academic-title">Academic Details</h1>
+                    <p class="academic-intro">A comprehensive overview of my educational background, technical skills, and projects.</p>
+                </div>
+
+                <!-- School Education -->
+                <div class="section-header">
+                    <h2 class="section-title">School Education</h2>
+                    <p class="section-subtitle">Foundation years of learning and growth</p>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-card-header">
+                        <div class="edu-card-icon"><i class="fas fa-school"></i></div>
+                        <div>
+                            <div class="edu-card-title">10th Standard (SSLC)</div>
+                            <div class="edu-card-subtitle">Arumugam Academy Matric Higher Secondary School, Aravakurichi</div>
+                        </div>
+                    </div>
+                    <div class="edu-card-body">
+                        <div class="edu-detail-row"><i class="fas fa-check-circle"></i><span>Result: <span class="edu-highlight">Pass</span></span></div>
+                        <div class="edu-detail-row"><i class="fas fa-map-marker-alt"></i><span>Aravakurichi, Tamil Nadu</span></div>
+                    </div>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-card-header">
+                        <div class="edu-card-icon"><i class="fas fa-school"></i></div>
+                        <div>
+                            <div class="edu-card-title">12th Standard (HSC)</div>
+                            <div class="edu-card-subtitle">Arumugam Academy Matric Higher Secondary School, Aravakurichi</div>
+                        </div>
+                    </div>
+                    <div class="edu-card-body">
+                        <div class="edu-detail-row"><i class="fas fa-percentage"></i><span>Percentage: <span class="edu-highlight">84%</span></span></div>
+                        <div class="edu-detail-row"><i class="fas fa-map-marker-alt"></i><span>Aravakurichi, Tamil Nadu</span></div>
+                    </div>
+                </div>
+
+                <!-- College Education -->
+                <div class="section-header">
+                    <h2 class="section-title">College Education</h2>
+                    <p class="section-subtitle">Higher education and specialization</p>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-card-header">
+                        <div class="edu-card-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div>
+                            <div class="edu-card-title">B.Tech Information Technology</div>
+                            <div class="edu-card-subtitle">VSB Engineering College, Karur</div>
+                        </div>
+                    </div>
+                    <div class="edu-card-body">
+                        <div class="edu-detail-row"><i class="fas fa-calendar-alt"></i><span>2023 &ndash; 2027</span></div>
+                        <div class="edu-detail-row"><i class="fas fa-chart-line"></i><span>CGPA: <span class="edu-highlight">8.66</span></span></div>
+                        <div class="edu-detail-row"><i class="fas fa-map-marker-alt"></i><span>Karur, Tamil Nadu</span></div>
+                    </div>
+                </div>
+
+                <!-- Technical Skills -->
+                <div class="section-header">
+                    <h2 class="section-title">Technical Skills</h2>
+                    <p class="section-subtitle">Technologies and tools I work with</p>
+                </div>
+
+                <div class="skills-section">
+                    <h3 class="skills-section-title">My Tech Stack</h3>
+                    <div class="skills-grid">
+                        <div class="skill-badge"><i class="fab fa-java"></i>Java</div>
+                        <div class="skill-badge"><i class="fab fa-js-square"></i>JavaScript</div>
+                        <div class="skill-badge"><i class="fab fa-react"></i>React</div>
+                        <div class="skill-badge"><i class="fab fa-node-js"></i>Node.js</div>
+                        <div class="skill-badge"><i class="fas fa-leaf"></i>MongoDB</div>
+                        <div class="skill-badge"><i class="fab fa-html5"></i>HTML5</div>
+                        <div class="skill-badge"><i class="fab fa-css3-alt"></i>CSS3</div>
+                        <div class="skill-badge"><i class="fab fa-git-alt"></i>Git</div>
+                        <div class="skill-badge"><i class="fas fa-server"></i>REST APIs</div>
+                        <div class="skill-badge"><i class="fas fa-database"></i>MySQL</div>
+                        <div class="skill-badge"><i class="fas fa-cog"></i>Spring Boot</div>
+                        <div class="skill-badge"><i class="fas fa-route"></i>Express.js</div>
+                    </div>
+                </div>
+
+                <!-- Projects -->
+                <div class="section-header">
+                    <h2 class="section-title">Projects</h2>
+                    <p class="section-subtitle">Key projects developed during my academic journey</p>
+                </div>
+
+                <div class="projects-list-section">
+                    <h3 class="project-list-title">Project Titles</h3>
+                    <ul class="project-list">
+                        <li class="project-list-item"><i class="fas fa-boxes"></i>Inventory Management System</li>
+                        <li class="project-list-item"><i class="fas fa-tractor"></i>AgroConnect</li>
+                        <li class="project-list-item"><i class="fas fa-heartbeat"></i>MedicalVault</li>
+                        <li class="project-list-item"><i class="fas fa-comments"></i>Real-time Chat Application</li>
+                    </ul>
+                </div>
+
+            </section>
+
+            <footer>
+                <div class="footer-content">
+                    <p class="copyright">&copy; 2025 Kavya &mdash; All Rights Reserved</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/kavya-s-4838ba307/" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:kavyasakthivelsk@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="https://x.com/Kavya_S_0" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script>
+        function createRainbowBubbles() {
+            const bubblesContainer = document.getElementById("bubblesContainer");
+            const bubbleCount = 30;
+            const rainbowColors = ["#ff0000","#ff7f00","#ffff00","#00ff00","#0000ff","#4b0082","#9400d3","#ff1493","#00ced1","#ff69b4","#ffd700","#32cd32"];
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement("div");
+                bubble.classList.add("bubble");
+                const size = Math.random() * 20 + 10;
+                const startX = Math.random() * 100;
+                const animationDuration = Math.random() * 10 + 15;
+                const animationDelay = Math.random() * 10;
+                const color = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+                bubble.style.width = size + "px";
+                bubble.style.height = size + "px";
+                bubble.style.left = startX + "%";
+                bubble.style.background = "radial-gradient(circle at 30% 30%, " + color + "88, " + color + "44, transparent)";
+                bubble.style.animationDelay = animationDelay + "s";
+                bubble.style.animationDuration = animationDuration + "s";
+                bubble.style.boxShadow = "0 0 " + (size/2) + "px " + color + "66";
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+        createRainbowBubbles();
+        // ── Navigation: auto-highlight current page + mobile sidebar ──
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks   = document.querySelectorAll('.nav-link');
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar    = document.getElementById('sidebar');
+
+            // 1. Auto-detect the current page and set active state on load/refresh.
+            const currentPage = window.location.pathname.split('/').pop() || 'home.html';
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                if (href === currentPage || (currentPage === '' && (href === '#' || href === 'home.html'))) {
+                    link.classList.add('active');
+                }
+            });
+
+            // 2. Click handler: prevent reload only when clicking the current page link.
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#' || href === currentPage) {
+                        e.preventDefault();
+                    }
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // 3. Intersection Observer for in-page section tracking (URL hash update).
+            const sections = document.querySelectorAll('section[id], [data-section]');
+            if (sections.length > 1) {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.id || entry.target.dataset.section;
+                            if (id && history.replaceState) {
+                                history.replaceState(null, '', '#' + id);
+                            }
+                        }
+                    });
+                }, { root: null, rootMargin: '0px', threshold: 0.55 });
+                sections.forEach(sec => observer.observe(sec));
+            }
+
+            // 4. Mobile sidebar toggle
+            menuToggle.addEventListener('click', function () {
+                sidebar.classList.toggle('active');
+            });
+
+            // 5. Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function (e) {
+                if (window.innerWidth <= 768 &&
+                    !sidebar.contains(e.target) &&
+                    !menuToggle.contains(e.target) &&
+                    sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
