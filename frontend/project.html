@@ -1,1428 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kavya S - My Projects</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #472f66;
-            --secondary-color: #4a90e2;
-            --accent-color: #e0d7ff;
-            --text-color: #000000;
-            --light-text: #333333;
-            --bg-color: #ffffff;
-            --sidebar-bg: #f9f8ff;
-            --shadow: 0 5px 15px rgba(107, 76, 230, 0.15);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            font-weight: 500;
-        }
-
-        /* Animated Gradient Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #8b7fb8, #a8c5ff);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            opacity: 0.05;
-            z-index: -2;
-        }
-
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* Rainbow Bubbles Container */
-        .bubbles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: floatBubble 15s infinite ease-in-out;
-        }
-
-        @keyframes floatBubble {
-            0% {
-                transform: translateY(100vh) translateX(0) scale(0);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 0.3;
-                transform: scale(1);
-            }
-
-            90% {
-                opacity: 0.3;
-            }
-
-            100% {
-                transform: translateY(-100vh) translateX(100px) scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* Geometric Shapes Background */
-        .geometric-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .shape {
-            position: absolute;
-            opacity: 0.1;
-            animation: floatShape 20s infinite ease-in-out;
-        }
-
-        .shape-1 {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            top: 10%;
-            left: 10%;
-            animation-duration: 25s;
-        }
-
-        .shape-2 {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-            border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
-            top: 60%;
-            right: 10%;
-            animation-duration: 30s;
-            animation-delay: -5s;
-        }
-
-        .shape-3 {
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
-            border-radius: 41% 59% 41% 59% / 41% 59% 41% 59%;
-            bottom: 10%;
-            left: 30%;
-            animation-duration: 35s;
-            animation-delay: -10s;
-        }
-
-        @keyframes floatShape {
-
-            0%,
-            100% {
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-
-            25% {
-                transform: translate(30px, -30px) rotate(90deg) scale(1.1);
-            }
-
-            50% {
-                transform: translate(-20px, 20px) rotate(180deg) scale(0.9);
-            }
-
-            75% {
-                transform: translate(20px, 30px) rotate(270deg) scale(1.05);
-            }
-        }
-
-
-        /* Header with profile */
-        header {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 8px 15px;
-            border-radius: 50px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            animation: slideDown 0.8s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        header:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(139, 127, 184, 0.15);
-        }
-
-        .profile-circle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            margin-right: 10px;
-            overflow: hidden;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(139, 127, 184, 0.4);
-            }
-
-            70% {
-                box-shadow: 0 0 0 10px rgba(139, 127, 184, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(139, 127, 184, 0);
-            }
-        }
-
-        .profile-name {
-            font-weight: 600;
-            color: var(--text-color);
-            letter-spacing: 0.5px;
-        }
-
-        /* Main Container */
-        .container {
-            display: flex;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        /* Sidebar Navigation */
-        .sidebar {
-            width: 200px;
-            background-color: var(--sidebar-bg);
-            backdrop-filter: blur(10px);
-            padding: 100px 0 30px;
-            z-index: 50;
-            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            animation: slideRight 0.8s ease-out;
-            overflow-y: auto;
-            min-height: 100vh;
-        }
-
-        @keyframes slideRight {
-            from {
-                transform: translateX(-100%);
-            }
-
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        .nav-menu {
-            list-style: none;
-        }
-
-        .nav-item {
-            margin-bottom: 5px;
-            opacity: 0;
-            animation: fadeInLeft 0.5s ease-out forwards;
-        }
-
-        .nav-item:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .nav-item:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .nav-item:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .nav-item:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-
-        .nav-item:nth-child(5) {
-            animation-delay: 0.5s;
-        }
-
-        .nav-item:nth-child(6) {
-            animation-delay: 0.6s;
-        }
-
-        .nav-item:nth-child(7) {
-            animation-delay: 0.7s;
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            color: var(--text-color);
-            text-decoration: none;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            font-size: 0.9rem;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 0;
-            background: linear-gradient(90deg, var(--accent-color), transparent);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::before {
-            width: 100%;
-        }
-
-        .nav-link:hover {
-            color: var(--primary-color);
-            padding-left: 25px;
-        }
-
-        .nav-link i {
-            margin-right: 12px;
-            font-size: 1.1rem;
-            transition: var(--transition);
-        }
-
-        .nav-link:hover i {
-            transform: rotate(10deg) scale(1.2);
-        }
-
-        .nav-link.active {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-
-        .nav-link.active::before {
-            width: 5px;
-            background-color: var(--primary-color);
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        /* Projects Section */
-        .projects-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .projects-header {
-            text-align: center;
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .projects-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeIn 1s ease-out;
-            position: relative;
-            letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(139, 127, 184, 0.2);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .projects-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            border-radius: 2px;
-            animation: expandWidth 1.5s ease-out 0.5s forwards;
-        }
-
-        @keyframes expandWidth {
-            to {
-                width: 100px;
-            }
-        }
-
-        .projects-intro {
-            font-size: 1.2rem;
-            color: var(--light-text);
-            margin-bottom: 30px;
-            line-height: 1.8;
-            opacity: 0;
-            animation: fadeIn 1.2s ease-out forwards;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            text-align: center;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .project-card {
-            background-color: var(--sidebar-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(139, 127, 184, 0.1);
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .project-card:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .project-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .project-card:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .project-card:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-
-        .project-card:nth-child(5) {
-            animation-delay: 0.5s;
-        }
-
-        .project-card:nth-child(6) {
-            animation-delay: 0.6s;
-        }
-
-        .project-card:nth-child(7) {
-            animation-delay: 0.7s;
-        }
-
-        /* ── Featured / Deployed project card ─────────────────── */
-        .project-card.featured {
-            grid-column: 1 / -1;             /* full width on all screen sizes */
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            position: relative;
-            box-shadow: 0 0 0 2px var(--primary-color),
-                        0 0 20px rgba(71, 47, 102, 0.25),
-                        0 10px 30px rgba(139, 127, 184, 0.2);
-            animation: featuredGlow 3s ease-in-out infinite alternate,
-                       fadeInUp 0.8s ease-out forwards;
-        }
-
-        @keyframes featuredGlow {
-            from { box-shadow: 0 0 0 2px var(--primary-color),
-                               0 0 15px rgba(71, 47, 102, 0.2),
-                               0 10px 30px rgba(139, 127, 184, 0.15); }
-            to   { box-shadow: 0 0 0 2px var(--secondary-color),
-                               0 0 30px rgba(74, 144, 226, 0.35),
-                               0 15px 40px rgba(139, 127, 184, 0.25); }
-        }
-
-        /* Featured badge */
-        .featured-badge {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            z-index: 10;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.8px;
-            padding: 5px 14px;
-            border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(71, 47, 102, 0.35);
-            text-transform: uppercase;
-        }
-
-        /* Featured card uses a two-column layout on wider screens */
-        @media (min-width: 769px) {
-            .project-card.featured .project-image {
-                height: 260px;
-            }
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(139, 127, 184, 0.15);
-        }
-
-        .project-image {
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .project-card:hover .project-image img {
-            transform: scale(1.05);
-        }
-
-        .project-image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(0deg, rgba(139, 127, 184, 0.7), rgba(139, 127, 184, 0));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .project-card:hover .project-image-overlay {
-            opacity: 1;
-        }
-
-        .project-type {
-            background-color: white;
-            color: var(--primary-color);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .project-content {
-            padding: 25px;
-        }
-
-        .project-name {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--text-color);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .project-description {
-            color: var(--light-text);
-            margin-bottom: 20px;
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        .project-tech {
-            margin-bottom: 0;
-        }
-
-        .tech-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-        }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tech-item {
-            background: linear-gradient(135deg, var(--accent-color), white);
-            color: var(--primary-color);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: 0 3px 8px rgba(139, 127, 184, 0.15);
-        }
-
-        .tech-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 10px rgba(139, 127, 184, 0.2);
-        }
-
-        /* Call to Action Section */
-        .cta-section {
-            background-color: var(--sidebar-bg);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(139, 127, 184, 0.1);
-            text-align: center;
-            margin-bottom: 30px;
-            animation: slideUp 0.8s ease-out 0.4s;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .cta-text {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: var(--text-color);
-            font-weight: 600;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 30px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(139, 127, 184, 0.2);
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s ease;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(139, 127, 184, 0.3);
-        }
-
-        .cta-button i {
-            margin-right: 10px;
-        }
-
-        .demo-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 20px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(139, 127, 184, 0.2);
-            margin-left: 10px;
-        }
-
-        .demo-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s ease;
-        }
-
-        .demo-btn:hover::before {
-            left: 100%;
-        }
-
-        .demo-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(139, 127, 184, 0.3);
-            color: white;
-        }
-
-        .demo-btn i {
-            margin-right: 8px;
-        }
-
-        .github-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 20px;
-            background: #333333;
-            color: white;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            margin-left: 10px;
-        }
-
-        .github-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s ease;
-        }
-
-        .github-btn:hover::before {
-            left: 100%;
-        }
-
-        .github-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            color: white;
-        }
-
-        .github-btn i {
-            margin-right: 8px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--sidebar-bg);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
-            margin-top: auto;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .copyright {
-            color: var(--light-text);
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: white;
-            color: var(--primary-color);
-            font-size: 1.1rem;
-            transition: var(--transition);
-            box-shadow: 0 5px 10px rgba(139, 127, 184, 0.15);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .social-link::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            transition: width 0.3s, height 0.3s;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-        }
-
-        .social-link:hover::before {
-            width: 100%;
-            height: 100%;
-        }
-
-        .social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(139, 127, 184, 0.2);
-            color: white;
-        }
-
-        .menu-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 10px;
-            border-radius: 50%;
-            box-shadow: var(--shadow);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .menu-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        .menu-toggle span {
-            display: block;
-            width: 20px;
-            height: 2px;
-            background-color: var(--primary-color);
-            margin: 5px auto;
-            transition: var(--transition);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                transform: translateX(-100%);
-                z-index: 99;
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                padding: 15px;
-            }
-
-            .menu-toggle {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .projects-title {
-                font-size: 2rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kavya S — Projects</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg0:#050816;--bg1:#0b1120;--bg2:#111827;--blue:#3B82F6;--violet:#8B5CF6;--cyan:#06B6D4;--text:#F1F5F9;--gray:#94A3B8;--gray2:#64748B;--glass:rgba(255,255,255,0.04);--gborder:rgba(255,255,255,0.08);--radius:16px;--ease:cubic-bezier(.16,.84,.44,1);--sidebar:210px;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg0);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh;}
+h1,h2,h3{font-family:'Sora',sans-serif;}a{text-decoration:none;color:inherit;}
+.bg-layer{position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse 900px 650px at 15% 10%,rgba(59,130,246,.16),transparent 60%),radial-gradient(ellipse 800px 700px at 85% 25%,rgba(139,92,246,.14),transparent 60%),linear-gradient(180deg,var(--bg0),var(--bg1) 45%,var(--bg2));}
+.bg-grid{position:fixed;inset:0;z-index:-2;opacity:.3;background-image:linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(ellipse 80% 60% at 50% 20%,black,transparent 75%);}
+header{position:fixed;top:18px;right:20px;z-index:200;display:flex;align-items:center;gap:10px;background:rgba(11,17,32,.65);backdrop-filter:blur(18px) saturate(150%);padding:7px 16px 7px 8px;border-radius:50px;border:1px solid var(--gborder);box-shadow:0 8px 24px rgba(0,0,0,.4);animation:dropIn .7s var(--ease);}
+@keyframes dropIn{from{transform:translateY(-50px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.profile-circle{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#050816;animation:ringPulse 2.5s infinite;}
+@keyframes ringPulse{0%{box-shadow:0 0 0 0 rgba(59,130,246,.45);}70%{box-shadow:0 0 0 10px rgba(59,130,246,0);}100%{box-shadow:0 0 0 0 rgba(59,130,246,0);}}
+.profile-name{font-weight:600;font-size:.84rem;letter-spacing:.4px;}
+.container{display:flex;min-height:100vh;}
+.sidebar{width:var(--sidebar);flex-shrink:0;position:fixed;top:0;left:0;height:100vh;background:rgba(11,17,32,.65);backdrop-filter:blur(20px) saturate(150%);border-right:1px solid var(--gborder);padding:90px 0 24px;z-index:100;overflow-y:auto;animation:sideIn .7s var(--ease);}
+@keyframes sideIn{from{transform:translateX(-100%);}to{transform:translateX(0);}}
+.nav-menu{list-style:none;}.nav-item{opacity:0;animation:fadeL .45s var(--ease) forwards;}
+.nav-item:nth-child(1){animation-delay:.08s;}.nav-item:nth-child(2){animation-delay:.16s;}.nav-item:nth-child(3){animation-delay:.24s;}.nav-item:nth-child(4){animation-delay:.32s;}.nav-item:nth-child(5){animation-delay:.40s;}.nav-item:nth-child(6){animation-delay:.48s;}.nav-item:nth-child(7){animation-delay:.56s;}
+@keyframes fadeL{from{opacity:0;transform:translateX(-14px);}to{opacity:1;transform:translateX(0);}}
+.nav-link{display:flex;align-items:center;gap:11px;padding:11px 22px;color:var(--gray);font-weight:600;font-size:.86rem;letter-spacing:.3px;position:relative;transition:all .3s var(--ease);}
+.nav-link::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,rgba(59,130,246,.12),transparent);transition:width .3s var(--ease);}
+.nav-link:hover{color:var(--text);padding-left:26px;}.nav-link:hover::before{width:100%;}.nav-link:hover i{color:var(--cyan);transform:scale(1.15);}
+.nav-link i{width:15px;text-align:center;transition:all .3s var(--ease);}
+.nav-link.active{color:var(--text);}.nav-link.active::before{width:3px;background:linear-gradient(180deg,var(--blue),var(--violet));}.nav-link.active i{color:var(--blue);}
+.main-content{flex:1;margin-left:var(--sidebar);padding:0 28px;min-width:0;}
+.menu-toggle{display:none;position:fixed;top:18px;left:18px;z-index:300;background:rgba(17,24,39,.75);backdrop-filter:blur(14px);border:1px solid var(--gborder);padding:10px;border-radius:50%;cursor:pointer;}
+.menu-toggle span{display:block;width:20px;height:2px;background:var(--blue);margin:4px auto;transition:.3s;}
+/* page */
+.page-container{max-width:1160px;margin:0 auto;padding:100px 16px 60px;}
+.page-header{text-align:center;margin-bottom:48px;opacity:0;animation:fadeUp .8s var(--ease) forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.page-title{font-size:2.6rem;font-weight:800;letter-spacing:-1px;}
+.page-title .accent{background:linear-gradient(120deg,var(--blue),var(--violet) 55%,var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.page-sub{color:var(--gray);font-size:1rem;margin-top:12px;max-width:600px;margin-left:auto;margin-right:auto;}
+.title-line{display:block;width:60px;height:3px;background:linear-gradient(90deg,var(--blue),var(--violet));border-radius:2px;margin:14px auto 0;}
+/* projects grid */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:24px;margin-bottom:50px;}
+/* featured spans full row */
+.proj-card{background:var(--glass);border:1px solid var(--gborder);border-radius:var(--radius);overflow:hidden;backdrop-filter:blur(14px);opacity:0;transform:translateY(26px);transition:opacity .6s var(--ease),transform .6s var(--ease),box-shadow .3s,border-color .3s;}
+.proj-card.in-view{opacity:1;transform:translateY(0);}
+.proj-card:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(59,130,246,.14);border-color:rgba(59,130,246,.3);}
+.proj-card.featured{grid-column:1/-1;border-color:rgba(139,92,246,.35);animation:glowPulse 3s ease-in-out infinite alternate;}
+@keyframes glowPulse{from{box-shadow:0 0 0 1px rgba(59,130,246,.25),0 0 20px rgba(59,130,246,.1);}to{box-shadow:0 0 0 1px rgba(139,92,246,.4),0 0 30px rgba(139,92,246,.2);}}
+.proj-card.featured .proj-img{height:260px;}
+.proj-img{height:190px;overflow:hidden;position:relative;}
+.proj-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease);}
+.proj-card:hover .proj-img img{transform:scale(1.06);}
+.proj-img-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,8,22,.7),transparent);display:flex;align-items:flex-start;padding:12px;opacity:1;}
+.type-badge{padding:4px 12px;border-radius:100px;font-size:.7rem;font-weight:700;background:rgba(17,24,39,.8);backdrop-filter:blur(8px);border:1px solid var(--gborder);color:var(--text);}
+.dep-badge{padding:4px 12px;border-radius:100px;font-size:.7rem;font-weight:700;background:linear-gradient(120deg,rgba(59,130,246,.25),rgba(139,92,246,.25));border:1px solid rgba(139,92,246,.4);color:#c4b5fd;letter-spacing:.5px;}
+.proj-body{padding:22px 24px;}
+.proj-name{font-size:1.15rem;font-weight:700;margin-bottom:10px;}
+.proj-desc{color:var(--gray);font-size:.88rem;line-height:1.65;margin-bottom:14px;}
+.tech-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.tech-tag{font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:100px;background:rgba(59,130,246,.1);color:#93c5fd;border:1px solid rgba(59,130,246,.2);}
+.proj-links{display:flex;gap:10px;flex-wrap:wrap;}
+.pl-btn{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid var(--gborder);color:var(--text);transition:all .25s var(--ease);}
+.pl-btn:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px);}
+.pl-btn.primary{background:linear-gradient(120deg,var(--blue),var(--violet));border-color:transparent;color:#fff;}
+.pl-btn.primary:hover{box-shadow:0 8px 20px rgba(59,130,246,.35);color:#fff;}
+/* cta */
+.cta-block{background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(139,92,246,.1));border:1px solid var(--gborder);border-radius:22px;padding:46px 28px;text-align:center;opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.cta-block.in-view{opacity:1;transform:translateY(0);}
+.cta-block h2{font-size:1.6rem;font-weight:700;margin-bottom:10px;}
+.cta-block p{color:var(--gray);margin-bottom:22px;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:12px;font-weight:600;font-size:.9rem;border:1px solid transparent;transition:transform .25s var(--ease),box-shadow .25s var(--ease);}
+.btn-primary{background:linear-gradient(120deg,var(--blue),var(--violet));color:#fff;box-shadow:0 8px 24px rgba(59,130,246,.25);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(139,92,246,.4);}
+/* footer */
+footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;text-align:center;border-top:1px solid var(--gborder);}
+.footer-content{display:flex;flex-direction:column;align-items:center;gap:13px;}
+.copyright{color:var(--gray2);font-size:.83rem;}
+.social-links{display:flex;gap:12px;}
+.social-link{width:37px;height:37px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--gborder);color:var(--blue);font-size:.95rem;transition:all .3s var(--ease);}
+.social-link:hover{transform:translateY(-3px);background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;box-shadow:0 8px 20px rgba(59,130,246,.35);}
+@media(max-width:768px){.sidebar{position:fixed;transform:translateX(-100%);z-index:99;}.sidebar.active{transform:translateX(0);}.main-content{margin-left:0;padding:0 14px;}.menu-toggle{display:flex;flex-direction:column;justify-content:center;align-items:center;}.projects-grid{grid-template-columns:1fr;}}
+</style>
 </head>
-
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg"></div>
+<div class="bg-layer"></div><div class="bg-grid"></div>
+<div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+<header><div class="profile-circle">KS</div><span class="profile-name">KAVYA S</span></header>
+<div class="container">
+  <nav class="sidebar" id="sidebar">
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="home.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+      <li class="nav-item"><a href="about.html" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+      <li class="nav-item"><a href="resume.html" class="nav-link"><i class="fas fa-file-alt"></i> Resume</a></li>
+      <li class="nav-item"><a href="project.html" class="nav-link active"><i class="fas fa-briefcase"></i> Projects</a></li>
+      <li class="nav-item"><a href="certificate.html" class="nav-link"><i class="fas fa-certificate"></i> Certifications</a></li>
+      <li class="nav-item"><a href="academic.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Academic</a></li>
+    </ul>
+  </nav>
+  <main class="main-content">
+    <div class="page-container">
+      <div class="page-header">
+        <h1 class="page-title">My <span class="accent">Projects</span></h1>
+        <p class="page-sub">Full-stack web applications and AI solutions built to solve real-world problems.</p>
+        <span class="title-line"></span>
+      </div>
+      <div class="projects-grid">
+        <!-- FEATURED: AI Shopping Assistant -->
+        <div class="proj-card featured">
+          <div class="proj-img">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="AI Shopping Assistant Agent" onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'">
+            <div class="proj-img-overlay"><span class="dep-badge">🚀 DEPLOYED</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-name">AI Shopping Assistant Agent</div>
+            <p class="proj-desc">An intelligent e-commerce assistant that helps users make better purchasing decisions using LLMs. Search for products in natural language, receive AI-generated recommendations, compare multiple products, understand pros and cons, and get summarised customer reviews. Powered by SerpAPI for real-time data and Groq Llama 3.3 for insights.</p>
+            <div class="tech-row"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">FastAPI</span><span class="tech-tag">MongoDB</span><span class="tech-tag">SerpAPI</span><span class="tech-tag">Groq Llama 3.3</span></div>
+            <div class="proj-links">
+              <a href="https://shopping-assistant-frontend-bma0.onrender.com" target="_blank" class="pl-btn primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/kavya-s" target="_blank" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
 
-    <!-- Rainbow Bubbles Container -->
-    <div class="bubbles-container" id="bubblesContainer"></div>
+        <!-- Inventory Management System -->
+        <div class="proj-card">
+          <div class="proj-img">
+            <img src="https://cdn.prod.website-files.com/67c68c93736617d0ce4e4f7b/67eed72de17b37c2ccd86622_675d37dc70219f4ef5baefbb_26.%2520Best%252011%2520Open%2520Source%2520Inventory%2520Management%2520Software%2520in%25202024.webp" alt="Inventory Management System">
+            <div class="proj-img-overlay"><span class="type-badge">Web App</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-name">Inventory Management System</div>
+            <p class="proj-desc">A web-based application that allows businesses to manage products, staff, and sales in real-time, with secure login and easy-to-use dashboards.</p>
+            <div class="tech-row"><span class="tech-tag">Java</span><span class="tech-tag">Spring Boot</span><span class="tech-tag">MySQL</span><span class="tech-tag">Thymeleaf</span><span class="tech-tag">Bootstrap</span></div>
+            <div class="proj-links">
+              <a href="https://drive.google.com/file/d/DEMO_VIDEO_1/view?usp=sharing" target="_blank" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
+            </div>
+          </div>
+        </div>
 
-    <div class="geometric-bg">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
+        <!-- AgroConnect -->
+        <div class="proj-card">
+          <div class="proj-img">
+            <img src="https://ecommercenews.asia/uploads/story/2022/10/25/GettyImages-1143888482.webp" alt="AgroConnect">
+            <div class="proj-img-overlay"><span class="type-badge">Marketplace</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-name">AgroConnect</div>
+            <p class="proj-desc">AgroConnect is a full-stack web application that allows farmers to sell and buy agricultural products directly, with real-time updates and user-friendly dashboards.</p>
+            <div class="tech-row"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express</span><span class="tech-tag">MySQL</span></div>
+            <div class="proj-links">
+              <a href="https://drive.google.com/file/d/DEMO_VIDEO_2/view?usp=sharing" target="_blank" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- MedicalVault -->
+        <div class="proj-card">
+          <div class="proj-img">
+            <img src="https://st.depositphotos.com/1907633/4742/i/450/depositphotos_47420559-stock-photo-doctor-with-a-stethoscope-in.jpg" alt="MedicalVault">
+            <div class="proj-img-overlay"><span class="type-badge">Healthcare App</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-name">MedicalVault</div>
+            <p class="proj-desc">A secure web application to store patient details, enabling quick access in emergency situations. Ensures data safety while providing easy healthcare management.</p>
+            <div class="tech-row"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express.js</span><span class="tech-tag">MongoDB</span></div>
+            <div class="proj-links">
+              <a href="https://drive.google.com/file/d/DEMO_VIDEO_3/view?usp=sharing" target="_blank" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- URL Prediction System -->
+        <div class="proj-card">
+          <div class="proj-img">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="URL Prediction System">
+            <div class="proj-img-overlay"><span class="type-badge">ML / Web App</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-name">URL Prediction System</div>
+            <p class="proj-desc">An AI-powered URL phishing detection system that analyzes URLs and predicts whether they are safe or malicious using machine learning techniques.</p>
+            <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">Flask</span><span class="tech-tag">Scikit-learn</span><span class="tech-tag">HTML</span><span class="tech-tag">JavaScript</span></div>
+            <div class="proj-links">
+              <a href="https://github.com" target="_blank" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://drive.google.com/file/d/DEMO_URL_PREDICTION/view?usp=sharing" target="_blank" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CropXpert -->
+        <div class="proj-card">
+          <div class="proj-img">
+            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CropXpert">
+            <div class="proj-img-overlay"><span class="type-badge">Agriculture AI</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-name">CropXpert</div>
+            <p class="proj-desc">An AI-based agriculture platform providing crop recommendations, plant disease detection, and fertilizer suggestions to help farmers improve productivity.</p>
+            <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">Flask API</span><span class="tech-tag">Machine Learning</span><span class="tech-tag">HTML</span><span class="tech-tag">JavaScript</span></div>
+            <div class="proj-links">
+              <a href="https://github.com" target="_blank" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://drive.google.com/file/d/DEMO_CROPXPERT/view?usp=sharing" target="_blank" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Food Scanner -->
+        <div class="proj-card">
+          <div class="proj-img">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI Food Scanner" onerror="this.src='https://images.unsplash.com/photo-1498837167385-e7eb443a6d59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+            <div class="proj-img-overlay"><span class="type-badge">Computer Vision</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-name">AI Food Scanner</div>
+            <p class="proj-desc">An AI-powered food scanner that identifies food items from images and provides nutritional information, calorie estimation, and healthy eating recommendations.</p>
+            <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">Flask</span><span class="tech-tag">OpenCV</span><span class="tech-tag">Machine Learning</span><span class="tech-tag">JavaScript</span></div>
+            <div class="proj-links">
+              <a href="https://github.com" target="_blank" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://drive.google.com/file/d/DEMO_AI_FOOD_SCANNER/view?usp=sharing" target="_blank" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+      </div><!-- /grid -->
+
+      <div class="cta-block">
+        <h2>Want to Collaborate?</h2>
+        <p>Feel free to reach out for project collaborations or any opportunities.</p>
+        <a href="contact.html" class="btn btn-primary"><i class="fas fa-envelope"></i> Get In Touch</a>
+      </div>
     </div>
-
-    <!-- Mobile Menu Toggle -->
-    <div class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-
-    <!-- Header with profile -->
-    <header>
-        <div class="profile-circle">KS</div>
-        <div class="profile-name">Kavya S</div>
-    </header>
-
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar" id="sidebar">
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="home.html" class="nav-link">
-                        <i class="fas fa-home"></i> Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="about.html" class="nav-link">
-                        <i class="fas fa-user"></i> About
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="contact.html" class="nav-link">
-                        <i class="fas fa-envelope"></i> Contact
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="resume.html" class="nav-link">
-                        <i class="fas fa-file-alt"></i> Resume
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="project.html" class="nav-link active">
-                        <i class="fas fa-briefcase"></i> Projects
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="certificate.html" class="nav-link">
-                        <i class="fas fa-certificate"></i> Certifications
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="academic.html" class="nav-link">
-                        <i class="fas fa-graduation-cap"></i> Academic
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Projects Section -->
-            <section class="projects-container">
-                <div class="projects-header">
-                    <h1 class="projects-title">My Projects</h1>
-                    <p class="projects-intro">Here are some projects I've built using full-stack development skills,
-                        focusing on web applications that solve real-world problems.</p>
-                </div>
-
-                <div class="projects-grid">
-                    <!-- ★ FEATURED Project: AI Shopping Assistant Agent (Deployed) ★ -->
-                    <div class="project-card featured" style="animation-delay: 0.05s;">
-                        <!-- Deployed badge -->
-                        <span class="featured-badge">🚀 Deployed Project</span>
-                        <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                                alt="AI Shopping Assistant Agent"
-                                onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'">
-                            <div class="project-image-overlay">
-                                <span class="project-type">AI Agent / Full Stack</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h2 class="project-name">AI Shopping Assistant Agent</h2>
-                            <p class="project-description">
-                                AI Shopping Assistant Agent is an intelligent e-commerce assistant that helps users make better purchasing decisions using Large Language Models. Users can search for products in natural language, receive AI-generated recommendations, compare multiple products, understand the pros and cons of each option, and get summarized customer reviews. The application retrieves real-time product information using SerpAPI and leverages the Groq Llama 3.3 LLM to generate personalised shopping insights and comparisons. The backend is built with FastAPI, while MongoDB stores user data and application information, providing a fast and scalable AI-powered shopping experience.
-                            </p>
-                            <div class="project-tech">
-                                <h3 class="tech-title">Technologies Used</h3>
-                                <div class="tech-list">
-                                    <span class="tech-item">HTML</span>
-                                    <span class="tech-item">CSS</span>
-                                    <span class="tech-item">JavaScript</span>
-                                    <span class="tech-item">FastAPI</span>
-                                    <span class="tech-item">MongoDB</span>
-                                    <span class="tech-item">SerpAPI</span>
-                                    <span class="tech-item">Groq Llama 3.3</span>
-                                </div>
-                            </div>
-                            <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
-                                <a href="https://shopping-assistant-frontend-bma0.onrender.com" target="_blank" class="demo-btn" style="margin-left: 0;">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
-                                <a href="https://github.com/kavya-s" target="_blank" class="github-btn" style="margin-left: 0;">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 1: Inventory Management System -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="https://cdn.prod.website-files.com/67c68c93736617d0ce4e4f7b/67eed72de17b37c2ccd86622_675d37dc70219f4ef5baefbb_26.%2520Best%252011%2520Open%2520Source%2520Inventory%2520Management%2520Software%2520in%25202024.webp"
-                                alt="Inventory Management System">
-                            <div class="project-image-overlay">
-                                <span class="project-type">Web App</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h2 class="project-name">Inventory Management System</h2>
-                            <p class="project-description">A web-based application that allows businesses to manage
-                                products, staff, and sales in real-time, with secure login and easy-to-use dashboards.
-                            </p>
-                            <div class="project-tech">
-                                <h3 class="tech-title">Technologies Used</h3>
-                                <div class="tech-list">
-                                    <span class="tech-item">Java</span>
-                                    <span class="tech-item">Spring Boot</span>
-                                    <span class="tech-item">MySQL</span>
-                                    <span class="tech-item">Thymeleaf</span>
-                                    <span class="tech-item">Bootstrap</span>
-                                </div>
-                            </div>
-                            <div style="margin-top: 20px; display: flex; align-items: center;">
-                                <a href="https://drive.google.com/file/d/1_inventory_demo/view" target="_blank"
-                                    class="cta-button" style="font-size:0.85rem; padding:8px 20px;">
-                                    <i class="fas fa-play-circle"></i> Demo Video
-                                </a>
-                                <!-- Replace with actual demo video link later -->
-                                <a href="https://drive.google.com/file/d/DEMO_VIDEO_1/view?usp=sharing" target="_blank"
-                                    class="demo-btn">
-                                    <i class="fas fa-play-circle"></i> Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2: AgroConnect -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="https://ecommercenews.asia/uploads/story/2022/10/25/GettyImages-1143888482.webp"
-                                alt="AgroConnect">
-                            <div class="project-image-overlay">
-                                <span class="project-type">E-commerce / Real-time Marketplace</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h2 class="project-name">AgroConnect</h2>
-                            <p class="project-description">AgroConnect is a full-stack web application that allows
-                                farmers to sell and buy agricultural products directly. It provides a secure platform
-                                with real-time updates, product management, and user-friendly dashboards.</p>
-                            <div class="project-tech">
-                                <h3 class="tech-title">Technologies Used</h3>
-                                <div class="tech-list">
-                                    <span class="tech-item">HTML</span>
-                                    <span class="tech-item">CSS</span>
-                                    <span class="tech-item">JavaScript</span>
-                                    <span class="tech-item">Node.js</span>
-                                    <span class="tech-item">Express</span>
-                                    <span class="tech-item">MySQL</span>
-                                    <span class="tech-item">Bootstrap</span>
-                                </div>
-                            </div>
-                            <div style="margin-top: 20px; display: flex; align-items: center;">
-                                <!-- Replace with actual demo video link later -->
-                                <a href="https://drive.google.com/file/d/DEMO_VIDEO_2/view?usp=sharing" target="_blank"
-                                    class="demo-btn">
-                                    <i class="fas fa-play-circle"></i> Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 3: MedicalVault -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="https://st.depositphotos.com/1907633/4742/i/450/depositphotos_47420559-stock-photo-doctor-with-a-stethoscope-in.jpg"
-                                alt="MedicalVault">
-                            <div class="project-image-overlay">
-                                <span class="project-type">Web App</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h2 class="project-name">MedicalVault</h2>
-                            <p class="project-description">A secure web application to store patient details, enabling
-                                quick access in emergency situations. Ensures data safety while providing an easy-to-use
-                                interface for healthcare management.</p>
-                            <div class="project-tech">
-                                <h3 class="tech-title">Technologies Used</h3>
-                                <div class="tech-list">
-                                    <span class="tech-item">HTML</span>
-                                    <span class="tech-item">CSS</span>
-                                    <span class="tech-item">JavaScript</span>
-                                    <span class="tech-item">Node.js</span>
-                                    <span class="tech-item">Express.js</span>
-                                    <span class="tech-item">MongoDB</span>
-                                </div>
-                            </div>
-                            <div style="margin-top: 20px; display: flex; align-items: center;">
-                                <a href="https://drive.google.com/file/d/1_medicalvault_demo/view" target="_blank"
-                                    class="cta-button" style="font-size:0.85rem; padding:8px 20px;">
-                                    <i class="fas fa-play-circle"></i> Demo Video
-                                </a>
-                                <!-- Replace with actual demo video link later -->
-                                <a href="https://drive.google.com/file/d/DEMO_VIDEO_3/view?usp=sharing" target="_blank"
-                                    class="demo-btn">
-                                    <i class="fas fa-play-circle"></i> Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 4: URL Prediction System -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <!-- Replace with actual project image later -->
-                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                alt="URL Prediction System">
-                            <div class="project-image-overlay">
-                                <span class="project-type">Machine Learning / Web App</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h2 class="project-name">URL Prediction System</h2>
-                            <p class="project-description">An AI-powered URL prediction and phishing detection system that analyzes URLs and predicts whether they are safe or malicious using machine learning techniques. The application helps users identify suspicious websites and improve cybersecurity awareness.</p>
-                            <div class="project-tech">
-                                <h3 class="tech-title">Technologies Used</h3>
-                                <div class="tech-list">
-                                    <span class="tech-item">Python</span>
-                                    <span class="tech-item">Flask</span>
-                                    <span class="tech-item">Machine Learning</span>
-                                    <span class="tech-item">HTML</span>
-                                    <span class="tech-item">CSS</span>
-                                    <span class="tech-item">JavaScript</span>
-                                    <span class="tech-item">Scikit-learn</span>
-                                </div>
-                            </div>
-                            <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap;">
-                                <a href="https://github.com" target="_blank" class="github-btn" style="margin-left: 0;">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <!-- Replace with actual demo video link later -->
-                                <a href="https://drive.google.com/file/d/DEMO_URL_PREDICTION/view?usp=sharing" target="_blank" class="demo-btn">
-                                    <i class="fas fa-play-circle"></i> Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 5: CropXpert -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <!-- Replace with actual project image later -->
-                            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                alt="CropXpert">
-                            <div class="project-image-overlay">
-                                <span class="project-type">Agriculture AI / Web App</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h2 class="project-name">CropXpert</h2>
-                            <p class="project-description">CropXpert is an AI-based agriculture platform that provides crop recommendations, plant disease detection, and fertilizer suggestions to help farmers make better decisions and improve productivity.</p>
-                            <div class="project-tech">
-                                <h3 class="tech-title">Technologies Used</h3>
-                                <div class="tech-list">
-                                    <span class="tech-item">HTML</span>
-                                    <span class="tech-item">CSS</span>
-                                    <span class="tech-item">JavaScript</span>
-                                    <span class="tech-item">Python</span>
-                                    <span class="tech-item">Flask API</span>
-                                    <span class="tech-item">Machine Learning</span>
-                                </div>
-                            </div>
-                            <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap;">
-                                <a href="https://github.com" target="_blank" class="github-btn" style="margin-left: 0;">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <!-- Replace with actual demo video link later -->
-                                <a href="https://drive.google.com/file/d/DEMO_CROPXPERT/view?usp=sharing" target="_blank" class="demo-btn">
-                                    <i class="fas fa-play-circle"></i> Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 6: AI Food Scanner -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <!-- High-quality AI food recognition / food scanner image -->
-                            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                alt="AI Food Scanner"
-                                onerror="this.src='https://images.unsplash.com/photo-1498837167385-e7eb443a6d59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
-                            <div class="project-image-overlay">
-                                <span class="project-type">Computer Vision / Web App</span>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h2 class="project-name">AI Food Scanner</h2>
-                            <p class="project-description">An AI-powered food scanner application that identifies food items from images and provides nutritional information, calorie estimation, and healthy eating recommendations using computer vision techniques.</p>
-                            <div class="project-tech">
-                                <h3 class="tech-title">Technologies Used</h3>
-                                <div class="tech-list">
-                                    <span class="tech-item">Python</span>
-                                    <span class="tech-item">Flask</span>
-                                    <span class="tech-item">OpenCV</span>
-                                    <span class="tech-item">Machine Learning</span>
-                                    <span class="tech-item">HTML</span>
-                                    <span class="tech-item">CSS</span>
-                                    <span class="tech-item">JavaScript</span>
-                                </div>
-                            </div>
-                            <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap;">
-                                <a href="https://github.com" target="_blank" class="github-btn" style="margin-left: 0;">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <!-- Replace with actual demo video link later -->
-                                <a href="https://drive.google.com/file/d/DEMO_AI_FOOD_SCANNER/view?usp=sharing" target="_blank" class="demo-btn">
-                                    <i class="fas fa-play-circle"></i> Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Call to Action Section -->
-                <div class="cta-section">
-                    <h2 class="cta-text">Want to collaborate? Feel free to contact me!</h2>
-                    <a href="contact.html" class="cta-button">
-                        <i class="fas fa-envelope"></i> Get In Touch
-                    </a>
-                </div>
-            </section>
-
-            <!-- Footer -->
-            <footer>
-                <div class="footer-content">
-                    <p class="copyright">© 2025 Kavya — All Rights Reserved </p>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/kavya-s-4838ba307/" target="_blank" class="social-link">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="mailto:kavyasakthivelsk@gmail.com" class="social-link">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://x.com/Kavya_S_0" target="_blank" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </div>
-                </div>
-            </footer>
-        </main>
-    </div>
-
-    <script>
-        // Create Rainbow Bubbles
-        function createRainbowBubbles() {
-            const bubblesContainer = document.getElementById('bubblesContainer');
-            const bubbleCount = 30;
-            const rainbowColors = [
-                '#ff0000', '#ff7f00', '#ffff00', '#00ff00',
-                '#0000ff', '#4b0082', '#9400d3', '#ff1493',
-                '#00ced1', '#ff69b4', '#ffd700', '#32cd32'
-            ];
-
-            for (let i = 0; i < bubbleCount; i++) {
-                const bubble = document.createElement('div');
-                bubble.classList.add('bubble');
-
-                // Random properties
-                const size = Math.random() * 20 + 10; // 10px to 30px
-                const startX = Math.random() * 100;
-                const animationDuration = Math.random() * 10 + 15; // 15s to 25s
-                const animationDelay = Math.random() * 10;
-                const color = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
-
-                bubble.style.width = `${size}px`;
-                bubble.style.height = `${size}px`;
-                bubble.style.left = `${startX}%`;
-                bubble.style.background = `radial-gradient(circle at 30% 30%, ${color}88, ${color}44, transparent)`;
-                bubble.style.animationDelay = `${animationDelay}s`;
-                bubble.style.animationDuration = `${animationDuration}s`;
-                bubble.style.boxShadow = `0 0 ${size / 2}px ${color}66`;
-
-                bubblesContainer.appendChild(bubble);
-            }
-        }
-
-        // Initialize bubbles
-        createRainbowBubbles();
-
-        // ── Navigation: auto-highlight current page + mobile sidebar ──
-        document.addEventListener('DOMContentLoaded', function () {
-            const navLinks   = document.querySelectorAll('.nav-link');
-            const menuToggle = document.getElementById('menuToggle');
-            const sidebar    = document.getElementById('sidebar');
-
-            // 1. Auto-detect the current page and set active state on load/refresh.
-            const currentPage = window.location.pathname.split('/').pop() || 'home.html';
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                const href = link.getAttribute('href');
-                if (href === currentPage || (currentPage === '' && (href === '#' || href === 'home.html'))) {
-                    link.classList.add('active');
-                }
-            });
-
-            // 2. Click handler: prevent reload only when clicking the current page link.
-            navLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    const href = this.getAttribute('href');
-                    if (href === '#' || href === currentPage) {
-                        e.preventDefault();
-                    }
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-
-            // 3. Intersection Observer for in-page section tracking (URL hash update).
-            const sections = document.querySelectorAll('section[id], [data-section]');
-            if (sections.length > 1) {
-                const observer = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const id = entry.target.id || entry.target.dataset.section;
-                            if (id && history.replaceState) {
-                                history.replaceState(null, '', '#' + id);
-                            }
-                        }
-                    });
-                }, { root: null, rootMargin: '0px', threshold: 0.55 });
-                sections.forEach(sec => observer.observe(sec));
-            }
-
-            // 4. Mobile sidebar toggle
-            menuToggle.addEventListener('click', function () {
-                sidebar.classList.toggle('active');
-            });
-
-            // 5. Close sidebar when clicking outside on mobile
-            document.addEventListener('click', function (e) {
-                if (window.innerWidth <= 768 &&
-                    !sidebar.contains(e.target) &&
-                    !menuToggle.contains(e.target) &&
-                    sidebar.classList.contains('active')) {
-                    sidebar.classList.remove('active');
-                }
-            });
-        });
-    </script>
+    <footer>
+      <div class="footer-content">
+        <p class="copyright">© 2025 Kavya — All Rights Reserved</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/kavya-s-4838ba307/" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:kavyasakthivelsk@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+          <a href="https://x.com/Kavya_S_0" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </footer>
+  </main>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  const links=document.querySelectorAll('.nav-link'),toggle=document.getElementById('menuToggle'),sb=document.getElementById('sidebar');
+  const cur=window.location.pathname.split('/').pop()||'home.html';
+  links.forEach(l=>{l.classList.remove('active');const h=l.getAttribute('href');if(h===cur)l.classList.add('active');});
+  links.forEach(l=>l.addEventListener('click',function(e){const h=this.getAttribute('href');if(h===cur)e.preventDefault();links.forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
+  toggle.addEventListener('click',()=>sb.classList.toggle('active'));
+  document.addEventListener('click',e=>{if(window.innerWidth<=768&&!sb.contains(e.target)&&!toggle.contains(e.target)&&sb.classList.contains('active'))sb.classList.remove('active');});
+  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view');});},{threshold:.1});
+  document.querySelectorAll('.proj-card,.cta-block').forEach(c=>io.observe(c));
+});
+</script>
 </body>
-
 </html>
