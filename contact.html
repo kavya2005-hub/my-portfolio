@@ -156,26 +156,13 @@ footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;tex
     </footer>
   </main>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-/* ============================================================
-   CONTACT FORM — Production-ready implementation
-   Primary:  Formspree  (no OAuth, no token expiry)
-   Fallback: EmailJS    (used if Formspree fails)
+  /* ============================================================
+     CONTACT FORM — Production-ready implementation
+     Primary: FormSubmit AJAX API (no auth key, direct inbox delivery)
+     ============================================================ */
 
-   ACTION REQUIRED before deploying:
-   1. Go to https://formspree.io → create a free account
-   2. Create a new form → copy the endpoint URL
-   3. Replace YOUR_FORMSPREE_ENDPOINT below with your real URL
-      e.g. "https://formspree.io/f/xyzabcde"
-   4. EmailJS fallback: reconnect Gmail in EmailJS dashboard
-      Dashboard → Email Services → service_cpjx0eq → Reconnect
-   ============================================================ */
-
-  const FORMSPREE_URL = 'https://formspree.io/f/xyzabcde'; // ← REPLACE THIS
-
-  /* -- EmailJS init (fallback) -- */
-  emailjs.init({ publicKey: 'oPADNBjtV6Nvn2tHf' });
+  const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/kavyasakthivelsk@gmail.com';
 
   /* -- Nav + sidebar -- */
   document.addEventListener('DOMContentLoaded', function () {
@@ -249,36 +236,23 @@ footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;tex
     return null; // no error
   }
 
-  /* ── Primary: send via Formspree ── */
-  async function sendViaFormspree(name, email, subject, message) {
-    const res = await fetch(FORMSPREE_URL, {
+  /* ── Send email via FormSubmit ── */
+  async function sendViaFormSubmit(name, email, subject, message) {
+    const res = await fetch(FORMSUBMIT_URL, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        name:    sanitize(name),
-        email:   sanitize(email),
-        subject: sanitize(subject),
-        message: sanitize(message),
-        _replyto: email  // Formspree puts this as reply-to
+        name:     sanitize(name),
+        email:    sanitize(email),
+        subject:  sanitize(subject),
+        message:  sanitize(message),
+        _captcha: 'false'
       })
     });
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      throw new Error(data.error || 'HTTP ' + res.status);
+      throw new Error(data.message || 'HTTP ' + res.status);
     }
-    return true;
-  }
-
-  /* ── Fallback: send via EmailJS ── */
-  async function sendViaEmailJS(name, email, subject, message) {
-    await emailjs.send('service_cpjx0eq', 'template_1p7348i', {
-      from_name:  sanitize(name),
-      from_email: sanitize(email),
-      subject:    sanitize(subject),
-      message:    sanitize(message),
-      to_name:    'Kavya',
-      reply_to:   email
-    });
     return true;
   }
 
@@ -315,61 +289,28 @@ footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;tex
     btn.classList.add('loading');
     btn.disabled = true;
 
-    let sent = false;
-    let lastError = '';
-
-    /* 1. Try Formspree first */
     try {
-      await sendViaFormspree(name, email, subject, message);
-      sent = true;
-      console.log('✅ Sent via Formspree');
-    } catch (err) {
-      lastError = err.message || 'Formspree error';
-      console.warn('Formspree failed:', lastError, '— trying EmailJS fallback…');
-    }
-
-    /* 2. Fallback to EmailJS if Formspree failed */
-    if (!sent) {
-      try {
-        await sendViaEmailJS(name, email, subject, message);
-        sent = true;
-        console.log('✅ Sent via EmailJS (fallback)');
-      } catch (err) {
-        const ejText = err.text || err.message || '';
-        lastError = ejText || 'EmailJS error';
-
-        if (err.status === 412 && ejText.toLowerCase().includes('invalid grant')) {
-          console.error(
-            '❌ EmailJS Gmail Invalid Grant.\n' +
-            'Fix: EmailJS Dashboard → Email Services → service_cpjx0eq → Reconnect Account.'
-          );
-          lastError = 'email service needs reconnection';
-        } else {
-          console.error('❌ EmailJS failed:', err.status, ejText);
-        }
-      }
-    }
-
-    /* Restore button */
-    btn.classList.remove('loading');
-    btn.disabled = false;
-
-    /* Show result */
-    if (sent) {
+      await sendViaFormSubmit(name, email, subject, message);
+      
       showAlert(successMsg,
         '<i class="fas fa-check-circle"></i> Message sent successfully! I\'ll get back to you as soon as possible.',
-        7000
+        8000
       );
       this.reset();
-    } else {
+    } catch (err) {
+      console.error('Submission failed:', err);
       showAlert(errorMsg,
         '<i class="fas fa-exclamation-circle"></i> ' +
-        'Oops! Something went wrong (' + lastError + '). ' +
+        'Oops! Something went wrong (' + err.message + '). ' +
         'Please email me directly at ' +
         '<a href="mailto:kavyasakthivelsk@gmail.com" style="color:inherit;font-weight:700;">' +
         'kavyasakthivelsk@gmail.com</a>',
         10000
       );
+    } finally {
+      /* Restore button */
+      btn.classList.remove('loading');
+      btn.disabled = false;
     }
   });
 </script>
