@@ -158,38 +158,220 @@ footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;tex
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-emailjs.init({publicKey:"oPADNBjtV6Nvn2tHf"});
-document.addEventListener('DOMContentLoaded',function(){
-  const links=document.querySelectorAll('.nav-link'),toggle=document.getElementById('menuToggle'),sb=document.getElementById('sidebar');
-  const cur=window.location.pathname.split('/').pop()||'home.html';
-  links.forEach(l=>{l.classList.remove('active');const h=l.getAttribute('href');if(h===cur)l.classList.add('active');});
-  links.forEach(l=>l.addEventListener('click',function(e){const h=this.getAttribute('href');if(h===cur)e.preventDefault();links.forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
-  toggle.addEventListener('click',()=>sb.classList.toggle('active'));
-  document.addEventListener('click',e=>{if(window.innerWidth<=768&&!sb.contains(e.target)&&!toggle.contains(e.target)&&sb.classList.contains('active'))sb.classList.remove('active');});
-  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view');});},{threshold:.1});
-  document.querySelectorAll('.card,.form-card').forEach(c=>io.observe(c));
-});
-document.getElementById('contactForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  const btn=document.getElementById('submitBtn'),ok=document.getElementById('successMessage'),err=document.getElementById('errorMessage');
-  ok.style.display='none';err.style.display='none';
-  const name=document.getElementById('name').value.trim(),email=document.getElementById('email').value.trim(),subject=document.getElementById('subject').value.trim(),message=document.getElementById('message').value.trim();
-  if(!name||!email||!subject||!message){err.innerHTML='<i class="fas fa-exclamation-circle"></i> Please fill in all fields.';err.style.display='block';return;}
-  btn.classList.add('loading');btn.disabled=true;
-  const params={from_name:name,from_email:email,subject,message,to_name:'Kavya',reply_to:email};
-  console.group('EmailJS — outgoing');console.log('Service:service_cpjx0eq | Template:template_1p7348i');console.log('Payload:',params);console.groupEnd();
-  emailjs.send('service_cpjx0eq','template_1p7348i',params)
-    .then(r=>{console.log('SUCCESS',r.status,r.text);ok.style.display='block';document.getElementById('contactForm').reset();setTimeout(()=>{ok.style.display='none';},6000);})
-    .catch(er=>{
-      console.group('EmailJS ERROR');console.error('Status:',er.status);console.error('Text:',er.text);console.error('Full:',er);
-      if(er.status===412){if(er.text&&er.text.toLowerCase().includes('invalid grant')){console.warn('HTTP 412 Gmail Invalid Grant — re-authenticate in EmailJS dashboard.');}else{console.warn('HTTP 412 — Add origin to EmailJS Allowed Origins: '+window.location.origin);}}
-      console.groupEnd();
-      let detail=er.text?er.text.includes('Invalid grant')?'email service disconnected':er.text:er.status?'HTTP '+er.status:'network error';
-      err.innerHTML='<i class="fas fa-exclamation-circle"></i> Oops! Something went wrong ('+detail+'). Email me at <a href="mailto:kavyasakthivelsk@gmail.com" style="color:inherit;font-weight:700;">kavyasakthivelsk@gmail.com</a>';
-      err.style.display='block';setTimeout(()=>{err.style.display='none';},8000);
-    })
-    .finally(()=>{btn.classList.remove('loading');btn.disabled=false;});
-});
+/* ============================================================
+   CONTACT FORM — Production-ready implementation
+   Primary:  Formspree  (no OAuth, no token expiry)
+   Fallback: EmailJS    (used if Formspree fails)
+
+   ACTION REQUIRED before deploying:
+   1. Go to https://formspree.io → create a free account
+   2. Create a new form → copy the endpoint URL
+   3. Replace YOUR_FORMSPREE_ENDPOINT below with your real URL
+      e.g. "https://formspree.io/f/xyzabcde"
+   4. EmailJS fallback: reconnect Gmail in EmailJS dashboard
+      Dashboard → Email Services → service_cpjx0eq → Reconnect
+   ============================================================ */
+
+  const FORMSPREE_URL = 'https://formspree.io/f/xyzabcde'; // ← REPLACE THIS
+
+  /* -- EmailJS init (fallback) -- */
+  emailjs.init({ publicKey: 'oPADNBjtV6Nvn2tHf' });
+
+  /* -- Nav + sidebar -- */
+  document.addEventListener('DOMContentLoaded', function () {
+    const links  = document.querySelectorAll('.nav-link');
+    const toggle = document.getElementById('menuToggle');
+    const sb     = document.getElementById('sidebar');
+    const cur    = window.location.pathname.split('/').pop() || 'home.html';
+
+    links.forEach(l => {
+      l.classList.remove('active');
+      if (l.getAttribute('href') === cur) l.classList.add('active');
+    });
+    links.forEach(l => l.addEventListener('click', function (e) {
+      if (this.getAttribute('href') === cur) e.preventDefault();
+      links.forEach(x => x.classList.remove('active'));
+      this.classList.add('active');
+    }));
+    toggle.addEventListener('click', () => sb.classList.toggle('active'));
+    document.addEventListener('click', e => {
+      if (window.innerWidth <= 768 && !sb.contains(e.target) &&
+          !toggle.contains(e.target) && sb.classList.contains('active'))
+        sb.classList.remove('active');
+    });
+
+    /* -- Scroll reveal -- */
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.card, .form-card').forEach(c => io.observe(c));
+  });
+
+  /* ── Utility helpers ── */
+
+  /** Basic HTML/script tag sanitizer — strips tags from user input */
+  function sanitize(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;');
+  }
+
+  /** RFC-5322 simplified email regex */
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+  }
+
+  /** Show an alert and auto-hide after `ms` milliseconds */
+  function showAlert(el, msg, ms) {
+    el.innerHTML = msg;
+    el.style.display = 'block';
+    if (ms) setTimeout(() => { el.style.display = 'none'; }, ms);
+  }
+
+  function hideAlerts() {
+    document.getElementById('successMessage').style.display = 'none';
+    document.getElementById('errorMessage').style.display   = 'none';
+  }
+
+  /* ── Field-level validation ── */
+  function validateForm(name, email, subject, message) {
+    if (!name)    return 'Please enter your name.';
+    if (name.length < 2) return 'Name must be at least 2 characters.';
+    if (!email)   return 'Please enter your email address.';
+    if (!isValidEmail(email)) return 'Please enter a valid email address.';
+    if (!subject) return 'Please enter a subject.';
+    if (subject.length < 3) return 'Subject must be at least 3 characters.';
+    if (!message) return 'Please write a message.';
+    if (message.length < 10) return 'Message must be at least 10 characters.';
+    return null; // no error
+  }
+
+  /* ── Primary: send via Formspree ── */
+  async function sendViaFormspree(name, email, subject, message) {
+    const res = await fetch(FORMSPREE_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name:    sanitize(name),
+        email:   sanitize(email),
+        subject: sanitize(subject),
+        message: sanitize(message),
+        _replyto: email  // Formspree puts this as reply-to
+      })
+    });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || 'HTTP ' + res.status);
+    }
+    return true;
+  }
+
+  /* ── Fallback: send via EmailJS ── */
+  async function sendViaEmailJS(name, email, subject, message) {
+    await emailjs.send('service_cpjx0eq', 'template_1p7348i', {
+      from_name:  sanitize(name),
+      from_email: sanitize(email),
+      subject:    sanitize(subject),
+      message:    sanitize(message),
+      to_name:    'Kavya',
+      reply_to:   email
+    });
+    return true;
+  }
+
+  /* ── Form submit handler ── */
+  document.getElementById('contactForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const btn        = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMessage');
+    const errorMsg   = document.getElementById('errorMessage');
+
+    /* Prevent duplicate submissions */
+    if (btn.disabled) return;
+
+    hideAlerts();
+
+    /* Read + trim values */
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    /* Client-side validation */
+    const validationError = validateForm(name, email, subject, message);
+    if (validationError) {
+      showAlert(errorMsg,
+        '<i class="fas fa-exclamation-circle"></i> ' + validationError,
+        6000
+      );
+      return;
+    }
+
+    /* Loading state — disable button to prevent duplicate sends */
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    let sent = false;
+    let lastError = '';
+
+    /* 1. Try Formspree first */
+    try {
+      await sendViaFormspree(name, email, subject, message);
+      sent = true;
+      console.log('✅ Sent via Formspree');
+    } catch (err) {
+      lastError = err.message || 'Formspree error';
+      console.warn('Formspree failed:', lastError, '— trying EmailJS fallback…');
+    }
+
+    /* 2. Fallback to EmailJS if Formspree failed */
+    if (!sent) {
+      try {
+        await sendViaEmailJS(name, email, subject, message);
+        sent = true;
+        console.log('✅ Sent via EmailJS (fallback)');
+      } catch (err) {
+        const ejText = err.text || err.message || '';
+        lastError = ejText || 'EmailJS error';
+
+        if (err.status === 412 && ejText.toLowerCase().includes('invalid grant')) {
+          console.error(
+            '❌ EmailJS Gmail Invalid Grant.\n' +
+            'Fix: EmailJS Dashboard → Email Services → service_cpjx0eq → Reconnect Account.'
+          );
+          lastError = 'email service needs reconnection';
+        } else {
+          console.error('❌ EmailJS failed:', err.status, ejText);
+        }
+      }
+    }
+
+    /* Restore button */
+    btn.classList.remove('loading');
+    btn.disabled = false;
+
+    /* Show result */
+    if (sent) {
+      showAlert(successMsg,
+        '<i class="fas fa-check-circle"></i> Message sent successfully! I\'ll get back to you as soon as possible.',
+        7000
+      );
+      this.reset();
+    } else {
+      showAlert(errorMsg,
+        '<i class="fas fa-exclamation-circle"></i> ' +
+        'Oops! Something went wrong (' + lastError + '). ' +
+        'Please email me directly at ' +
+        '<a href="mailto:kavyasakthivelsk@gmail.com" style="color:inherit;font-weight:700;">' +
+        'kavyasakthivelsk@gmail.com</a>',
+        10000
+      );
+    }
+  });
 </script>
 </body>
 </html>
