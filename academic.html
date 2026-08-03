@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -13,8 +13,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg0);color:var(--text);line
 h1,h2,h3{font-family:'Sora',sans-serif;}a{text-decoration:none;color:inherit;}
 .bg-layer{position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse 900px 650px at 15% 10%,rgba(59,130,246,.16),transparent 60%),radial-gradient(ellipse 800px 700px at 85% 25%,rgba(139,92,246,.14),transparent 60%),linear-gradient(180deg,var(--bg0),var(--bg1) 45%,var(--bg2));}
 .bg-grid{position:fixed;inset:0;z-index:-2;opacity:.3;background-image:linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(ellipse 80% 60% at 50% 20%,black,transparent 75%);}
-</style>
-<style>
 header{position:fixed;top:18px;right:20px;z-index:200;display:flex;align-items:center;gap:10px;background:rgba(11,17,32,.65);backdrop-filter:blur(18px) saturate(150%);padding:7px 16px 7px 8px;border-radius:50px;border:1px solid var(--gborder);box-shadow:0 8px 24px rgba(0,0,0,.4);animation:dropIn .7s var(--ease);}
 @keyframes dropIn{from{transform:translateY(-50px);opacity:0;}to{transform:translateY(0);opacity:1;}}
 .profile-circle{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#050816;animation:ringPulse 2.5s infinite;}
@@ -34,6 +32,7 @@ header{position:fixed;top:18px;right:20px;z-index:200;display:flex;align-items:c
 .main-content{flex:1;margin-left:var(--sidebar);padding:0 28px;min-width:0;}
 .menu-toggle{display:none;position:fixed;top:18px;left:18px;z-index:300;background:rgba(17,24,39,.75);backdrop-filter:blur(14px);border:1px solid var(--gborder);padding:10px;border-radius:50%;cursor:pointer;}
 .menu-toggle span{display:block;width:20px;height:2px;background:var(--blue);margin:4px auto;transition:.3s;}
+/* page layout */
 .page-container{max-width:1060px;margin:0 auto;padding:100px 16px 60px;}
 .page-header{text-align:center;margin-bottom:52px;opacity:0;animation:fadeUp .8s var(--ease) forwards;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
@@ -41,22 +40,25 @@ header{position:fixed;top:18px;right:20px;z-index:200;display:flex;align-items:c
 .page-title .accent{background:linear-gradient(120deg,var(--blue),var(--violet) 55%,var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .page-sub{color:var(--gray);font-size:1rem;margin-top:12px;max-width:600px;margin-left:auto;margin-right:auto;}
 .title-line{display:block;width:60px;height:3px;background:linear-gradient(90deg,var(--blue),var(--violet));border-radius:2px;margin:14px auto 0;}
+/* section heading bar */
 .sec-block{margin:44px 0 22px;}
 .sec-bar{display:flex;align-items:center;gap:12px;}
 .sec-bar::before{content:'';width:4px;height:28px;background:linear-gradient(180deg,var(--blue),var(--violet));border-radius:2px;flex-shrink:0;}
 .sec-bar-title{font-size:1.3rem;font-weight:800;letter-spacing:-.3px;}
 .sec-bar-title .accent{background:linear-gradient(120deg,var(--blue),var(--violet) 55%,var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.sec-bar-title .accent-icon{color:var(--blue);margin-right:2px;}
 .sec-bar-sub{color:var(--gray);font-size:.85rem;margin-top:5px;}
+/* cards generic */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .55s var(--ease),transform .55s var(--ease);}
 .reveal.in-view{opacity:1;transform:translateY(0);}
-</style>
-<style>
+/* ── HIGHLIGHTS STRIP ── */
 .highlights-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:44px;}
 .hl-card{background:var(--glass);border:1px solid var(--gborder);border-radius:var(--radius);padding:18px 14px;text-align:center;transition:border-color .3s,transform .25s var(--ease),box-shadow .25s;}
 .hl-card:hover{border-color:rgba(59,130,246,.35);transform:translateY(-4px);box-shadow:0 12px 28px rgba(59,130,246,.12);}
 .hl-icon{font-size:1.6rem;margin-bottom:8px;}
 .hl-val{font-size:1.1rem;font-weight:800;color:var(--text);font-family:'Sora',sans-serif;}
 .hl-desc{font-size:.72rem;color:var(--gray);margin-top:3px;}
+/* ── EDUCATION TIMELINE ── */
 .edu-timeline{position:relative;padding-left:32px;}
 .edu-timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--blue),var(--violet),rgba(139,92,246,.1));}
 .edu-item{position:relative;margin-bottom:24px;}
@@ -74,6 +76,7 @@ header{position:fixed;top:18px;right:20px;z-index:200;display:flex;align-items:c
 .edu-primary .edu-card-head{background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(59,130,246,.14));}
 .edu-primary .edu-item::before{background:linear-gradient(135deg,var(--violet),var(--cyan));box-shadow:0 0 0 3px rgba(139,92,246,.2),0 0 14px rgba(139,92,246,.4);}
 .edu-primary .edu-card{border-color:rgba(139,92,246,.3);}
+/* ── LEADERSHIP ── */
 .leadership-card{background:var(--glass);border:1px solid var(--gborder);border-radius:var(--radius);padding:24px;transition:border-color .3s,transform .25s var(--ease),box-shadow .25s;}
 .leadership-card:hover{border-color:rgba(59,130,246,.3);transform:translateY(-4px);box-shadow:0 14px 32px rgba(59,130,246,.1);}
 .lead-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
@@ -83,14 +86,14 @@ header{position:fixed;top:18px;right:20px;z-index:200;display:flex;align-items:c
 .lead-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
 .lead-list li{display:flex;align-items:flex-start;gap:9px;font-size:.87rem;color:var(--gray);}
 .lead-list li::before{content:'\f054';font-family:'Font Awesome 6 Free';font-weight:900;font-size:.6rem;color:var(--blue);margin-top:5px;flex-shrink:0;}
-</style>
-<style>
+/* ── EXTRA CURRICULAR ── */
 .extra-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
 .extra-card{background:var(--glass);border:1px solid var(--gborder);border-radius:var(--radius);padding:22px;display:flex;align-items:flex-start;gap:14px;transition:border-color .3s,transform .25s var(--ease),box-shadow .25s;}
 .extra-card:hover{border-color:rgba(139,92,246,.35);transform:translateY(-4px);box-shadow:0 12px 28px rgba(139,92,246,.1);}
 .extra-icon{font-size:1.7rem;flex-shrink:0;margin-top:2px;}
 .extra-title{font-size:.95rem;font-weight:700;margin-bottom:4px;}
 .extra-desc{font-size:.8rem;color:var(--gray);line-height:1.55;}
+/* ── CERTIFICATES ── */
 .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
 .cert-card{background:var(--glass);border:1px solid var(--gborder);border-radius:var(--radius);overflow:hidden;transition:border-color .3s,transform .25s var(--ease),box-shadow .25s;}
 .cert-card:hover{border-color:rgba(59,130,246,.3);transform:translateY(-5px);box-shadow:0 16px 36px rgba(59,130,246,.12);}
@@ -106,12 +109,14 @@ header{position:fixed;top:18px;right:20px;z-index:200;display:flex;align-items:c
 .cert-tag{display:inline-block;padding:2px 9px;border-radius:100px;font-size:.68rem;font-weight:600;background:rgba(59,130,246,.1);color:#93c5fd;border:1px solid rgba(59,130,246,.2);margin-right:5px;margin-bottom:10px;}
 .view-btn{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid var(--gborder);color:var(--text);transition:all .25s var(--ease);}
 .view-btn:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px);}
+/* ── FOOTER ── */
 footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;text-align:center;border-top:1px solid var(--gborder);}
 .footer-content{display:flex;flex-direction:column;align-items:center;gap:13px;}
 .copyright{color:var(--gray2);font-size:.83rem;}
 .social-links{display:flex;gap:12px;}
 .social-link{width:37px;height:37px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--gborder);color:var(--blue);font-size:.95rem;transition:all .3s var(--ease);}
 .social-link:hover{transform:translateY(-3px);background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;box-shadow:0 8px 20px rgba(59,130,246,.35);}
+/* ── RESPONSIVE ── */
 @media(max-width:768px){.sidebar{position:fixed;transform:translateX(-100%);z-index:99;}.sidebar.active{transform:translateX(0);}.main-content{margin-left:0;padding:0 14px;}.menu-toggle{display:flex;flex-direction:column;justify-content:center;align-items:center;}.edu-timeline{padding-left:22px;}.highlights-grid{grid-template-columns:repeat(2,1fr);}.cert-grid{grid-template-columns:1fr;}.extra-grid{grid-template-columns:1fr;}}
 </style>
 </head>
@@ -134,33 +139,40 @@ footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;tex
   <main class="main-content">
     <div class="page-container">
 
+      <!-- PAGE HEADER -->
       <div class="page-header">
         <h1 class="page-title">Academic <span class="accent">Profile</span></h1>
         <p class="page-sub">Education, achievements, leadership, and certifications — all in one place.</p>
         <span class="title-line"></span>
       </div>
 
-      <!-- HIGHLIGHTS -->
+      <!-- ── HIGHLIGHTS STRIP ── -->
       <div class="highlights-grid reveal">
-        <div class="hl-card"><div class="hl-icon">🎓</div><div class="hl-val">B.Tech IT</div><div class="hl-desc">Information Technology</div></div>
-        <div class="hl-card"><div class="hl-icon">⭐</div><div class="hl-val">8.66 CGPA</div><div class="hl-desc">Current Academic Score</div></div>
-        <div class="hl-card"><div class="hl-icon">📚</div><div class="hl-val">82%</div><div class="hl-desc">HSC Percentage</div></div>
-        <div class="hl-card"><div class="hl-icon">🏆</div><div class="hl-val">Coordinator</div><div class="hl-desc">Symposium Lead</div></div>
-        <div class="hl-card"><div class="hl-icon">🏅</div><div class="hl-val">Paper Presenter</div><div class="hl-desc">LEOFEST'24 — BIT</div></div>
-        <div class="hl-card"><div class="hl-icon">🥇</div><div class="hl-val">Champion</div><div class="hl-desc">School Kho-Kho</div></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fas fa-graduation-cap"></i></div><div class="hl-val">B.Tech IT</div><div class="hl-desc">Information Technology</div></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fas fa-star"></i></div><div class="hl-val">8.66 CGPA</div><div class="hl-desc">Current Academic Score</div></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fas fa-book"></i></div><div class="hl-val">82%</div><div class="hl-desc">HSC Percentage</div></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fas fa-trophy"></i></div><div class="hl-val">Coordinator</div><div class="hl-desc">Symposium Lead</div></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fas fa-medal"></i></div><div class="hl-val">Paper Presenter</div><div class="hl-desc">LEOFEST'24 — BIT</div></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fas fa-award"></i></div><div class="hl-val">Champion</div><div class="hl-desc">School Kho-Kho</div></div>
       </div>
 
-      <!-- EDUCATION -->
+      <!-- ── EDUCATION ── -->
       <div class="sec-block reveal">
-        <div class="sec-bar"><span class="sec-bar-title">🎓 <span class="accent">Education</span></span></div>
+        <div class="sec-bar"><span class="sec-bar-title"><i class="fas fa-graduation-cap accent-icon"></i> <span class="accent">Education</span></span></div>
         <div class="sec-bar-sub">Academic journey from school to engineering college.</div>
       </div>
+
       <div class="edu-timeline">
+
+        <!-- B.Tech — primary / featured -->
         <div class="edu-item edu-primary reveal">
           <div class="edu-card">
             <div class="edu-card-head">
               <div class="edu-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
-              <div><div class="edu-title">Bachelor of Technology — Information Technology</div><div class="edu-subtitle">V.S.B Engineering College (Autonomous), Karur</div></div>
+              <div>
+                <div class="edu-title">Bachelor of Technology — Information Technology</div>
+                <div class="edu-subtitle">V.S.B Engineering College (Autonomous), Karur</div>
+              </div>
             </div>
             <div class="edu-card-body">
               <div class="edu-meta"><i class="fas fa-calendar-alt"></i><span>2023 – 2027</span></div>
@@ -170,11 +182,16 @@ footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;tex
             </div>
           </div>
         </div>
+
+        <!-- HSC -->
         <div class="edu-item reveal">
           <div class="edu-card">
             <div class="edu-card-head">
               <div class="edu-icon-wrap" style="background:linear-gradient(135deg,rgba(6,182,212,.5),rgba(59,130,246,.4));"><i class="fas fa-school"></i></div>
-              <div><div class="edu-title">Higher Secondary — HSC (12th Standard)</div><div class="edu-subtitle">Arumugam Academy Matric Higher Secondary School</div></div>
+              <div>
+                <div class="edu-title">Higher Secondary — HSC (12th Standard)</div>
+                <div class="edu-subtitle">Arumugam Academy Matric Higher Secondary School</div>
+              </div>
             </div>
             <div class="edu-card-body">
               <div class="edu-meta"><i class="fas fa-percentage"></i><span>Percentage: <span class="hl">82%</span></span></div>
@@ -182,11 +199,16 @@ footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;tex
             </div>
           </div>
         </div>
+
+        <!-- SSLC -->
         <div class="edu-item reveal">
           <div class="edu-card">
             <div class="edu-card-head">
               <div class="edu-icon-wrap" style="background:linear-gradient(135deg,rgba(139,92,246,.4),rgba(6,182,212,.3));"><i class="fas fa-book-open"></i></div>
-              <div><div class="edu-title">Secondary Education — SSLC (10th Standard)</div><div class="edu-subtitle">Arumugam Academy Matric Higher Secondary School</div></div>
+              <div>
+                <div class="edu-title">Secondary Education — SSLC (10th Standard)</div>
+                <div class="edu-subtitle">Arumugam Academy Matric Higher Secondary School</div>
+              </div>
             </div>
             <div class="edu-card-body">
               <div class="edu-meta"><i class="fas fa-check-circle"></i><span>Result: <span class="hl">Pass</span></span></div>
@@ -194,17 +216,22 @@ footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;tex
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- LEADERSHIP -->
+      </div><!-- /edu-timeline -->
+
+      <!-- ── LEADERSHIP ── -->
       <div class="sec-block reveal">
-        <div class="sec-bar"><span class="sec-bar-title">🏆 Leadership <span class="accent">Experience</span></span></div>
+        <div class="sec-bar"><span class="sec-bar-title"><i class="fas fa-trophy accent-icon"></i> Leadership <span class="accent">Experience</span></span></div>
         <div class="sec-bar-sub">Roles that demonstrate initiative, teamwork, and communication skills.</div>
       </div>
+
       <div class="leadership-card reveal">
         <div class="lead-head">
           <div class="lead-icon"><i class="fas fa-bullhorn"></i></div>
-          <div><div class="lead-title">Symposium Coordinator</div><div class="lead-sub">V.S.B Engineering College · Technical Events</div></div>
+          <div>
+            <div class="lead-title">Symposium Coordinator</div>
+            <div class="lead-sub">V.S.B Engineering College · Technical Events</div>
+          </div>
         </div>
         <ul class="lead-list">
           <li>Coordinated technical symposium events end-to-end, overseeing scheduling, logistics, and on-the-day execution.</li>
@@ -213,96 +240,143 @@ footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;tex
         </ul>
       </div>
 
-      <!-- EXTRA CURRICULAR -->
+      <!-- ── EXTRA CURRICULAR ── -->
       <div class="sec-block reveal">
-        <div class="sec-bar"><span class="sec-bar-title">🌟 Extra Curricular <span class="accent">Activities</span></span></div>
+        <div class="sec-bar"><span class="sec-bar-title"><i class="fas fa-star accent-icon"></i> Extra Curricular <span class="accent">Activities</span></span></div>
         <div class="sec-bar-sub">Beyond the classroom — competitions, events, and sports achievements.</div>
       </div>
+
       <div class="extra-grid">
         <div class="extra-card reveal">
-          <div class="extra-icon">🏆</div>
-          <div><div class="extra-title">Paper Presentation Participant</div><div class="extra-desc">Presented a technical paper on Google's Self-Driving Car at LEOFEST'24, Bannari Amman Institute of Technology (April 2024).</div></div>
+          <div class="extra-icon"><i class="fas fa-trophy"></i></div>
+          <div>
+            <div class="extra-title">Paper Presentation Participant</div>
+            <div class="extra-desc">Presented a technical paper on Google's Self-Driving Car at LEOFEST'24, Bannari Amman Institute of Technology (April 2024).</div>
+          </div>
         </div>
         <div class="extra-card reveal">
-          <div class="extra-icon">🏆</div>
-          <div><div class="extra-title">Symposium Coordinator</div><div class="extra-desc">Led and coordinated a college-level technical symposium, managing teams, schedules, and faculty liaison for a successful event.</div></div>
+          <div class="extra-icon"><i class="fas fa-trophy"></i></div>
+          <div>
+            <div class="extra-title">Symposium Coordinator</div>
+            <div class="extra-desc">Led and coordinated a college-level technical symposium, managing teams, schedules, and faculty liaison for a successful event.</div>
+          </div>
         </div>
         <div class="extra-card reveal">
-          <div class="extra-icon">🏆</div>
-          <div><div class="extra-title">School Kho-Kho Champion</div><div class="extra-desc">Won the school-level Kho-Kho championship, demonstrating team spirit, athletic ability, and competitive excellence.</div></div>
+          <div class="extra-icon"><i class="fas fa-trophy"></i></div>
+          <div>
+            <div class="extra-title">School Kho-Kho Champion</div>
+            <div class="extra-desc">Won the school-level Kho-Kho championship, demonstrating team spirit, athletic ability, and competitive excellence.</div>
+          </div>
         </div>
       </div>
 
-      <!-- CERTIFICATES -->
+      <!-- ── CERTIFICATES ── -->
       <div class="sec-block reveal">
-        <div class="sec-bar"><span class="sec-bar-title">📜 <span class="accent">Certificates</span></span></div>
+        <div class="sec-bar"><span class="sec-bar-title"><i class="fas fa-scroll accent-icon"></i> <span class="accent">Certificates</span></span></div>
         <div class="sec-bar-sub">Professional certifications and participation recognitions.</div>
       </div>
+
       <div class="cert-grid">
+
+        <!-- 1 Paper Presentation -->
         <div class="cert-card reveal">
           <div class="cert-card-top">
             <div class="cert-icon-wrap"><i class="fas fa-file-alt"></i></div>
-            <div><div class="cert-name">Paper Presentation Certificate</div><div class="cert-org"><i class="fas fa-university"></i> Bannari Amman Institute of Technology</div></div>
+            <div>
+              <div class="cert-name">Paper Presentation Certificate</div>
+              <div class="cert-org"><i class="fas fa-university"></i> Bannari Amman Institute of Technology</div>
+            </div>
           </div>
           <div class="cert-card-body">
             <span class="cert-tag">LEOFEST'24</span><span class="cert-tag">Technical</span>
             <div class="cert-desc">Recognised for presenting a paper on <strong>Google's Self-Driving Car</strong> at the national-level technical event LEOFEST'24.</div>
             <div class="cert-meta"><i class="fas fa-calendar-alt"></i> 6 April 2024</div>
-            <a href="#" class="view-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            <a href="https://drive.google.com/file/d/13vQKWNBG4MSIycdkD1b64AQIptY8e3BC/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="view-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
           </div>
         </div>
+
+        <!-- 2 Online Quiz -->
         <div class="cert-card reveal">
           <div class="cert-card-top">
             <div class="cert-icon-wrap"><i class="fas fa-question-circle"></i></div>
-            <div><div class="cert-name">Online Quiz — International Women's Day</div><div class="cert-org"><i class="fas fa-university"></i> V.S.B Engineering College</div></div>
+            <div>
+              <div class="cert-name">Online Quiz — International Women's Day</div>
+              <div class="cert-org"><i class="fas fa-university"></i> V.S.B Engineering College</div>
+            </div>
           </div>
           <div class="cert-card-body">
             <span class="cert-tag">Quiz</span><span class="cert-tag">Women's Day</span>
             <div class="cert-desc">Participated in the International Women's Day Online Quiz, securing a score of <strong>15 out of 20</strong>.</div>
             <div class="cert-meta"><i class="fas fa-calendar-alt"></i> 2025</div>
-            <a href="#" class="view-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            <a href="https://drive.google.com/file/d/1llyZZ6KZB7OrF_c55ccvOiRrhcgQFBHE/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="view-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
           </div>
         </div>
+
+        <!-- 3 SmallTalk English -->
         <div class="cert-card reveal">
           <div class="cert-card-top">
             <div class="cert-icon-wrap"><i class="fas fa-comments"></i></div>
-            <div><div class="cert-name">SmallTalk English Assessment</div><div class="cert-org"><i class="fas fa-globe"></i> SmallTalk English</div></div>
+            <div>
+              <div class="cert-name">SmallTalk English Assessment</div>
+              <div class="cert-org"><i class="fas fa-globe"></i> SmallTalk English</div>
+            </div>
           </div>
           <div class="cert-card-body">
             <span class="cert-tag">English</span><span class="cert-tag">B1+ Intermediate</span>
             <div class="cert-desc">Completed an English Speaking Assessment and achieved the proficiency level of <strong>B1+ Intermediate</strong>.</div>
             <div class="cert-meta"><i class="fas fa-calendar-alt"></i> 16 May 2026</div>
-            <a href="#" class="view-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            <a href="https://drive.google.com/file/d/1q_txg5Cf7uSweh7x0s_sjfoKchGRKTg-/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="view-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
           </div>
         </div>
+
+        <!-- 4 Career Counselling -->
         <div class="cert-card reveal">
           <div class="cert-card-top">
             <div class="cert-icon-wrap"><i class="fas fa-briefcase"></i></div>
-            <div><div class="cert-name">Professional Career Counselling Webinar</div><div class="cert-org"><i class="fas fa-building"></i> Glewayte</div></div>
+            <div>
+              <div class="cert-name">Professional Career Counselling Webinar</div>
+              <div class="cert-org"><i class="fas fa-building"></i> Glewayte</div>
+            </div>
           </div>
           <div class="cert-card-body">
             <span class="cert-tag">Webinar</span><span class="cert-tag">Career Development</span>
             <div class="cert-desc">Attended a professional career counselling webinar focused on career planning, industry trends, and growth strategies.</div>
             <div class="cert-meta"><i class="fas fa-calendar-alt"></i> 29 June 2024</div>
-            <a href="#" class="view-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            <a href="https://drive.google.com/file/d/1pDPfc9cg2RdM7IzoQKT9ZgV5pJAocfKF/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="view-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
           </div>
         </div>
+
+        <!-- 5 Flipkart Runway -->
         <div class="cert-card reveal">
           <div class="cert-card-top">
             <div class="cert-icon-wrap"><i class="fas fa-trophy"></i></div>
-            <div><div class="cert-name">Flipkart Runway Season 5</div><div class="cert-org"><i class="fas fa-building"></i> Unstop</div></div>
+            <div>
+              <div class="cert-name">Flipkart Runway Season 5</div>
+              <div class="cert-org"><i class="fas fa-building"></i> Unstop</div>
+            </div>
           </div>
           <div class="cert-card-body">
             <span class="cert-tag">Competition</span><span class="cert-tag">Participation</span>
-            <div class="cert-desc">Certificate of Participation for taking part in Flipkart Runway Season 5, a competitive national-level programme on Unstop.</div>
+            <div class="cert-desc">Certificate of Participation awarded for taking part in Flipkart Runway Season 5, a competitive national-level programme on Unstop.</div>
             <div class="cert-meta"><i class="fas fa-calendar-alt"></i> 2024</div>
-            <a href="#" class="view-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            <a href="https://drive.google.com/file/d/12ByQQd6P6L8wPJs5FKjshPz4hZgTWREs/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="view-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
           </div>
         </div>
+
       </div><!-- /cert-grid -->
 
     </div><!-- /page-container -->
-    <footer><div class="footer-content"><p class="copyright">© 2025 Kavya — All Rights Reserved</p><div class="social-links"><a href="https://www.linkedin.com/in/kavya-s-4838ba307/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-linkedin-in"></i></a><a href="mailto:kavyasakthivelsk@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a><a href="https://x.com/Kavya_S_0" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-twitter"></i></a></div></div></footer>
+
+    <footer>
+      <div class="footer-content">
+        <p class="copyright">© 2025 Kavya — All Rights Reserved</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/kavya-s-4838ba307/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:kavyasakthivelsk@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+          <a href="https://x.com/Kavya_S_0" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </footer>
   </main>
 </div>
 <script>
