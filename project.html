@@ -65,6 +65,20 @@ header{position:fixed;top:18px;right:20px;z-index:200;display:flex;align-items:c
 .pl-btn:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px);}
 .pl-btn.primary{background:linear-gradient(120deg,var(--blue),var(--violet));border-color:transparent;color:#fff;}
 .pl-btn.primary:hover{box-shadow:0 8px 20px rgba(59,130,246,.35);color:#fff;}
+/* live badge */
+.live-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:100px;font-size:.72rem;font-weight:700;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);color:#34d399;letter-spacing:.5px;}
+.live-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;animation:livePulse 1.6s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+.proj-deployed-label{display:inline-block;font-size:.72rem;font-weight:600;color:#a78bfa;letter-spacing:.6px;margin-top:3px;margin-bottom:6px;text-transform:uppercase;}
+/* section heading */
+.section-heading{margin-bottom:28px;opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.section-heading.in-view{opacity:1;transform:translateY(0);}
+.section-heading h2{font-size:1.55rem;font-weight:800;letter-spacing:-.5px;display:flex;align-items:center;gap:10px;}
+.section-heading h2 .accent{background:linear-gradient(120deg,var(--blue),var(--violet) 55%,var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.section-heading p{color:var(--gray);font-size:.88rem;margin-top:6px;}
+.section-divider{height:1px;background:linear-gradient(90deg,var(--blue),var(--violet),transparent);opacity:.25;margin:44px 0 36px;border:none;}
+.deployed-section{margin-bottom:0;}
+.other-section{margin-bottom:0;}
 /* cta */
 .cta-block{background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(139,92,246,.1));border:1px solid var(--gborder);border-radius:22px;padding:46px 28px;text-align:center;opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
 .cta-block.in-view{opacity:1;transform:translateY(0);}
@@ -106,123 +120,179 @@ footer{background:rgba(11,17,32,.65);backdrop-filter:blur(14px);padding:20px;tex
         <p class="page-sub">Full-stack web applications and AI solutions built to solve real-world problems.</p>
         <span class="title-line"></span>
       </div>
-      <div class="projects-grid">
-        <!-- FEATURED: AI Shopping Assistant -->
-        <div class="proj-card featured">
-          <div class="proj-img">
-            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="AI Shopping Assistant Agent" onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'">
-            <div class="proj-img-overlay"><span class="dep-badge">🚀 DEPLOYED</span></div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-name">AI Shopping Assistant Agent</div>
-            <p class="proj-desc">An intelligent e-commerce assistant that helps users make better purchasing decisions using LLMs. Search for products in natural language, receive AI-generated recommendations, compare multiple products, understand pros and cons, and get summarised customer reviews. Powered by SerpAPI for real-time data and Groq Llama 3.3 for insights.</p>
-            <div class="tech-row"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">FastAPI</span><span class="tech-tag">MongoDB</span><span class="tech-tag">SerpAPI</span><span class="tech-tag">Groq Llama 3.3</span></div>
-            <div class="proj-links">
-              <a href="https://shopping-assistant-frontend-bma0.onrender.com" target="_blank" rel="noopener noreferrer" class="pl-btn primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-              <a href="https://github.com/kavya-s" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-          </div>
+      <!-- ═══════════════════════════════════════════
+           🚀 DEPLOYED PROJECTS SECTION
+           To add more deployed projects, copy a
+           .proj-card block inside .deployed-grid
+      ════════════════════════════════════════════ -->
+      <div class="deployed-section">
+        <div class="section-heading">
+          <h2>🚀 <span class="accent">Deployed</span> Projects</h2>
+          <p>Live applications running in production — accessible to anyone, anywhere.</p>
         </div>
+        <div class="projects-grid deployed-grid">
 
-        <!-- Inventory Management System -->
-        <div class="proj-card">
-          <div class="proj-img">
-            <img src="https://cdn.prod.website-files.com/67c68c93736617d0ce4e4f7b/67eed72de17b37c2ccd86622_675d37dc70219f4ef5baefbb_26.%2520Best%252011%2520Open%2520Source%2520Inventory%2520Management%2520Software%2520in%25202024.webp" alt="Inventory Management System">
-            <div class="proj-img-overlay"><span class="type-badge">Web App</span></div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-name">Inventory Management System</div>
-            <p class="proj-desc">A web-based application that allows businesses to manage products, staff, and sales in real-time, with secure login and easy-to-use dashboards.</p>
-            <div class="tech-row"><span class="tech-tag">Java</span><span class="tech-tag">Spring Boot</span><span class="tech-tag">MySQL</span><span class="tech-tag">Thymeleaf</span><span class="tech-tag">Bootstrap</span></div>
-            <div class="proj-links">
-              <a href="https://github.com/kavya2005-hub/inventory-management-system" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
-              <a href="https://drive.google.com/file/d/1kVXQYILghMSNysV85RcT0UzurinVlO8I/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
+          <!-- ExpenseIQ -->
+          <div class="proj-card featured">
+            <div class="proj-img">
+              <img
+                src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                alt="ExpenseIQ – AI-Powered Personal Expense Tracker"
+                onerror="this.src='https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'">
+              <div class="proj-img-overlay">
+                <span class="live-badge">🟢 Live Project</span>
+                <span class="dep-badge">⭐ FEATURED</span>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-name">ExpenseIQ – AI-Powered Personal Expense Tracker</div>
+              <div class="proj-deployed-label">✦ Deployed Project</div>
+              <p class="proj-desc">ExpenseIQ is an AI-powered personal finance management web application that enables users to manage income, expenses, budgets, and savings efficiently. The system provides intelligent spending analysis, personalized financial insights, and AI-powered investment recommendations based on users' spending behavior. It helps users identify unnecessary expenses, improve budgeting, and make smarter financial decisions through an interactive dashboard and real-time analytics.</p>
+              <div class="tech-row">
+                <span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express.js</span><span class="tech-tag">MongoDB Atlas</span><span class="tech-tag">JWT</span><span class="tech-tag">bcrypt</span><span class="tech-tag">Groq AI</span>
+              </div>
+              <div class="proj-links">
+                <a href="https://expensiq-1.onrender.com" target="_blank" rel="noopener noreferrer" class="pl-btn primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/kavya2005-hub/EXPENSEIQ-AI-POWERED-PERSONAL-EXPENSE-TRACKER" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- URL Prediction System -->
-        <div class="proj-card">
-          <div class="proj-img">
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="URL Prediction System">
-            <div class="proj-img-overlay"><span class="type-badge">ML / Web App</span></div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-name">URL Prediction System</div>
-            <p class="proj-desc">An AI-powered URL phishing detection system that analyzes URLs and predicts whether they are safe or malicious using machine learning techniques.</p>
-            <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">Flask</span><span class="tech-tag">Scikit-learn</span><span class="tech-tag">HTML</span><span class="tech-tag">JavaScript</span></div>
-            <div class="proj-links">
-              <a href="https://github.com/kavya2005-hub/URL-prediction" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
-              <a href="https://drive.google.com/file/d/1LliULv-wNlUAAcgLPLeKa9K6kKhw8vxe/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
-            </div>
-          </div>
-        </div>
+          <!-- ── Add more deployed project cards here ── -->
 
-        <!-- CropXpert -->
-        <div class="proj-card">
-          <div class="proj-img">
-            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CropXpert">
-            <div class="proj-img-overlay"><span class="type-badge">Agriculture AI</span></div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-name">CropXpert</div>
-            <p class="proj-desc">An AI-based agriculture platform providing crop recommendations, plant disease detection, and fertilizer suggestions to help farmers improve productivity.</p>
-            <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">Flask API</span><span class="tech-tag">Machine Learning</span><span class="tech-tag">HTML</span><span class="tech-tag">JavaScript</span></div>
-            <div class="proj-links">
-              <a href="https://github.com/kavya2005-hub/cropXpert" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
-              <a href="https://drive.google.com/file/d/1BE2GdmlIpQFcCQho_yw0rxkueLPDmKGI/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
-            </div>
-          </div>
-        </div>
+        </div><!-- /deployed-grid -->
+      </div><!-- /deployed-section -->
 
-        <!-- AgroConnect -->
-        <div class="proj-card">
-          <div class="proj-img">
-            <img src="https://ecommercenews.asia/uploads/story/2022/10/25/GettyImages-1143888482.webp" alt="AgroConnect">
-            <div class="proj-img-overlay"><span class="type-badge">Marketplace</span><span class="dep-badge">👥 Group Project</span></div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-name">AgroConnect (Team Project)</div>
-            <p class="proj-desc">AgroConnect is a full-stack web application that allows farmers to sell and buy agricultural products directly, with real-time updates and user-friendly dashboards.</p>
-            <div class="tech-row"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express</span><span class="tech-tag">MySQL</span></div>
-            <div class="proj-links">
-              <a href="https://github.com/Pavithra406/Agroconnect" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-          </div>
-        </div>
+      <hr class="section-divider">
 
-        <!-- MedicalVault -->
-        <div class="proj-card">
-          <div class="proj-img">
-            <img src="https://st.depositphotos.com/1907633/4742/i/450/depositphotos_47420559-stock-photo-doctor-with-a-stethoscope-in.jpg" alt="MedicalVault">
-            <div class="proj-img-overlay"><span class="type-badge">Healthcare App</span></div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-name">MedicalVault</div>
-            <p class="proj-desc">A secure web application to store patient details, enabling quick access in emergency situations. Ensures data safety while providing easy healthcare management.</p>
-            <div class="tech-row"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express.js</span><span class="tech-tag">MySQL</span></div>
-            <div class="proj-links">
-              <a href="https://github.com/kavya2005-hub/medicalvalut" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-          </div>
+      <!-- ═══════════════════════════════════════════
+           💼 OTHER PROJECTS SECTION  (unchanged)
+      ════════════════════════════════════════════ -->
+      <div class="other-section">
+        <div class="section-heading">
+          <h2>💼 Other <span class="accent">Projects</span></h2>
+          <p>Full-stack web applications and AI solutions built to solve real-world problems.</p>
         </div>
+        <div class="projects-grid">
 
-        <!-- AI Food Scanner -->
-        <div class="proj-card">
-          <div class="proj-img">
-            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI Food Scanner" onerror="this.src='https://images.unsplash.com/photo-1498837167385-e7eb443a6d59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
-            <div class="proj-img-overlay"><span class="type-badge">Computer Vision</span></div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-name">AI Food Scanner</div>
-            <p class="proj-desc">An AI-powered food scanner that identifies food items from images and provides nutritional information, calorie estimation, and healthy eating recommendations.</p>
-            <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">Flask</span><span class="tech-tag">OpenCV</span><span class="tech-tag">Machine Learning</span><span class="tech-tag">JavaScript</span></div>
-            <div class="proj-links">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+          <!-- AI Shopping Assistant -->
+          <div class="proj-card">
+            <div class="proj-img">
+              <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="AI Shopping Assistant Agent" onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'">
+              <div class="proj-img-overlay"><span class="dep-badge">🚀 DEPLOYED</span></div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-name">AI Shopping Assistant Agent</div>
+              <p class="proj-desc">An intelligent e-commerce assistant that helps users make better purchasing decisions using LLMs. Search for products in natural language, receive AI-generated recommendations, compare multiple products, understand pros and cons, and get summarised customer reviews. Powered by SerpAPI for real-time data and Groq Llama 3.3 for insights.</p>
+              <div class="tech-row"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">FastAPI</span><span class="tech-tag">MongoDB</span><span class="tech-tag">SerpAPI</span><span class="tech-tag">Groq Llama 3.3</span></div>
+              <div class="proj-links">
+                <a href="https://shopping-assistant-frontend-bma0.onrender.com" target="_blank" rel="noopener noreferrer" class="pl-btn primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/kavya-s" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
             </div>
           </div>
-        </div>
-      </div><!-- /grid -->
+
+          <!-- Inventory Management System -->
+          <div class="proj-card">
+            <div class="proj-img">
+              <img src="https://cdn.prod.website-files.com/67c68c93736617d0ce4e4f7b/67eed72de17b37c2ccd86622_675d37dc70219f4ef5baefbb_26.%2520Best%252011%2520Open%2520Source%2520Inventory%2520Management%2520Software%2520in%25202024.webp" alt="Inventory Management System">
+              <div class="proj-img-overlay"><span class="type-badge">Web App</span></div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-name">Inventory Management System</div>
+              <p class="proj-desc">A web-based application that allows businesses to manage products, staff, and sales in real-time, with secure login and easy-to-use dashboards.</p>
+              <div class="tech-row"><span class="tech-tag">Java</span><span class="tech-tag">Spring Boot</span><span class="tech-tag">MySQL</span><span class="tech-tag">Thymeleaf</span><span class="tech-tag">Bootstrap</span></div>
+              <div class="proj-links">
+                <a href="https://github.com/kavya2005-hub/inventory-management-system" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://drive.google.com/file/d/1kVXQYILghMSNysV85RcT0UzurinVlO8I/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- URL Prediction System -->
+          <div class="proj-card">
+            <div class="proj-img">
+              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="URL Prediction System">
+              <div class="proj-img-overlay"><span class="type-badge">ML / Web App</span></div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-name">URL Prediction System</div>
+              <p class="proj-desc">An AI-powered URL phishing detection system that analyzes URLs and predicts whether they are safe or malicious using machine learning techniques.</p>
+              <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">Flask</span><span class="tech-tag">Scikit-learn</span><span class="tech-tag">HTML</span><span class="tech-tag">JavaScript</span></div>
+              <div class="proj-links">
+                <a href="https://github.com/kavya2005-hub/URL-prediction" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://drive.google.com/file/d/1LliULv-wNlUAAcgLPLeKa9K6kKhw8vxe/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- CropXpert -->
+          <div class="proj-card">
+            <div class="proj-img">
+              <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CropXpert">
+              <div class="proj-img-overlay"><span class="type-badge">Agriculture AI</span></div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-name">CropXpert</div>
+              <p class="proj-desc">An AI-based agriculture platform providing crop recommendations, plant disease detection, and fertilizer suggestions to help farmers improve productivity.</p>
+              <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">Flask API</span><span class="tech-tag">Machine Learning</span><span class="tech-tag">HTML</span><span class="tech-tag">JavaScript</span></div>
+              <div class="proj-links">
+                <a href="https://github.com/kavya2005-hub/cropXpert" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://drive.google.com/file/d/1BE2GdmlIpQFcCQho_yw0rxkueLPDmKGI/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fas fa-play-circle"></i> Demo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- AgroConnect -->
+          <div class="proj-card">
+            <div class="proj-img">
+              <img src="https://ecommercenews.asia/uploads/story/2022/10/25/GettyImages-1143888482.webp" alt="AgroConnect">
+              <div class="proj-img-overlay"><span class="type-badge">Marketplace</span><span class="dep-badge">👥 Group Project</span></div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-name">AgroConnect (Team Project)</div>
+              <p class="proj-desc">AgroConnect is a full-stack web application that allows farmers to sell and buy agricultural products directly, with real-time updates and user-friendly dashboards.</p>
+              <div class="tech-row"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express</span><span class="tech-tag">MySQL</span></div>
+              <div class="proj-links">
+                <a href="https://github.com/Pavithra406/Agroconnect" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- MedicalVault -->
+          <div class="proj-card">
+            <div class="proj-img">
+              <img src="https://st.depositphotos.com/1907633/4742/i/450/depositphotos_47420559-stock-photo-doctor-with-a-stethoscope-in.jpg" alt="MedicalVault">
+              <div class="proj-img-overlay"><span class="type-badge">Healthcare App</span></div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-name">MedicalVault</div>
+              <p class="proj-desc">A secure web application to store patient details, enabling quick access in emergency situations. Ensures data safety while providing easy healthcare management.</p>
+              <div class="tech-row"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express.js</span><span class="tech-tag">MySQL</span></div>
+              <div class="proj-links">
+                <a href="https://github.com/kavya2005-hub/medicalvalut" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Food Scanner -->
+          <div class="proj-card">
+            <div class="proj-img">
+              <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI Food Scanner" onerror="this.src='https://images.unsplash.com/photo-1498837167385-e7eb443a6d59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+              <div class="proj-img-overlay"><span class="type-badge">Computer Vision</span></div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-name">AI Food Scanner</div>
+              <p class="proj-desc">An AI-powered food scanner that identifies food items from images and provides nutritional information, calorie estimation, and healthy eating recommendations.</p>
+              <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">Flask</span><span class="tech-tag">OpenCV</span><span class="tech-tag">Machine Learning</span><span class="tech-tag">JavaScript</span></div>
+              <div class="proj-links">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="pl-btn"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /projects-grid -->
+      </div><!-- /other-section -->
 
       <div class="cta-block">
         <h2>Want to Collaborate?</h2>
@@ -251,7 +321,7 @@ document.addEventListener('DOMContentLoaded',function(){
   toggle.addEventListener('click',()=>sb.classList.toggle('active'));
   document.addEventListener('click',e=>{if(window.innerWidth<=768&&!sb.contains(e.target)&&!toggle.contains(e.target)&&sb.classList.contains('active'))sb.classList.remove('active');});
   const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view');});},{threshold:.1});
-  document.querySelectorAll('.proj-card,.cta-block').forEach(c=>io.observe(c));
+  document.querySelectorAll('.proj-card,.cta-block,.section-heading').forEach(c=>io.observe(c));
 });
 </script>
 </body>
